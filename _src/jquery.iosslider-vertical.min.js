@@ -1,12 +1,12 @@
 /*
- * iosSlider - http://iosscripts.com/iosslider/
+ * iosSlider-vertical - http://iosscripts.com/iosslider-vertical/
  * 
- * A jQuery Horizontal Slider for iPhone/iPad Safari 
- * This plugin turns any wide element into a touch enabled horizontal slider.
+ * A jQuery Vertical Slider for iPhone/iPad Safari 
+ * This plugin turns any tall element into a touch enabled vertical slider.
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.47 (12/13/2012)
+ * Version: v0.1.0 (beta) (12/16/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
