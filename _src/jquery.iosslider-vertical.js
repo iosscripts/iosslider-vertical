@@ -139,11 +139,11 @@
 					} else {
 						
 						var lowSlideNumber = 0;
-						var lowSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+						var lowSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'y');
 						$(slideNodes).each(function(i) {
 							
-							if(helpers.getSliderOffset(this, 'x') < lowSlideOffset) {
-								lowSlideOffset = helpers.getSliderOffset(this, 'x');
+							if(helpers.getSliderOffset(this, 'y') < lowSlideOffset) {
+								lowSlideOffset = helpers.getSliderOffset(this, 'y');
 								lowSlideNumber = i;
 							}
 							
@@ -189,11 +189,11 @@
 						while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > 0)) {
 
 							var highSlideNumber = 0;
-							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'y');
 							$(slideNodes).each(function(i) {
 								
-								if(helpers.getSliderOffset(this, 'x') > highSlideOffset) {
-									highSlideOffset = helpers.getSliderOffset(this, 'x');
+								if(helpers.getSliderOffset(this, 'y') > highSlideOffset) {
+									highSlideOffset = helpers.getSliderOffset(this, 'y');
 									highSlideNumber = i;
 								}
 								
@@ -218,11 +218,11 @@
 					if(newOffset < 0) {
 					
 						var highSlideNumber = 0;
-						var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+						var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'y');
 						$(slideNodes).each(function(i) {
 							
-							if(helpers.getSliderOffset(this, 'x') > highSlideOffset) {
-								highSlideOffset = helpers.getSliderOffset(this, 'x');
+							if(helpers.getSliderOffset(this, 'y') > highSlideOffset) {
+								highSlideOffset = helpers.getSliderOffset(this, 'y');
 								highSlideNumber = i;
 							}
 							
@@ -327,7 +327,7 @@
 			
 			var distanceOffsetArray = new Array();
 			var xScrollDistanceArray = new Array();
-			var nodeOffset = helpers.getSliderOffset(node, 'x');
+			var nodeOffset = helpers.getSliderOffset(node, 'y');
 			var snapDirection = 0;
 			var maxSlideVelocity = 25 / 1024 * stageWidth;
 			var changeSlideFired = false;
@@ -369,7 +369,7 @@
 				tempChildrenOffsets[i] = childrenOffsets[i];
 				
 				if(i < slideNodes.length) {
-					tempSlideNodeOffsets[i] = helpers.getSliderOffset($(slideNodes[i]), 'x');
+					tempSlideNodeOffsets[i] = helpers.getSliderOffset($(slideNodes[i]), 'y');
 				}
 				
 			}
@@ -487,7 +487,7 @@
 
 			if(settings.snapToChildren || (((nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) && !settings.infiniteSlider)) {
 				
-				nodeOffset = helpers.getSliderOffset(node, 'x');
+				nodeOffset = helpers.getSliderOffset(node, 'y');
 				distanceOffsetArray.splice(0, distanceOffsetArray.length);
 				
 				while((nodeOffset < (tempChildrenOffsets[newChildOffset] - 0.5)) || (nodeOffset > (tempChildrenOffsets[newChildOffset] + 0.5))) {
@@ -619,15 +619,15 @@
 			if(has3DTransform && !isIe7 && !isIe8) {
 				
 				$(node).css({
-					'webkitTransform': 'matrix(1,0,0,1,' + sliderOffset + ',0)',
-					'MozTransform': 'matrix(1,0,0,1,' + sliderOffset + ',0)',
-					'transform': 'matrix(1,0,0,1,' + sliderOffset + ',0)'
+					'webkitTransform': 'matrix(1,0,0,1,0,' + sliderOffset + ')',
+					'MozTransform': 'matrix(1,0,0,1,0,' + sliderOffset + ')',
+					'transform': 'matrix(1,0,0,1,0,' + sliderOffset + ')'
 				});
 			
 			} else {
 
 				$(node).css({
-					left: sliderOffset + 'px'
+					top: sliderOffset + 'px'
 				});
 			
 			}
@@ -748,7 +748,7 @@
 			}
 			
 			var steps = Math.ceil(settings.autoSlideTransTimer / 10) + 1;
-			var startOffset = helpers.getSliderOffset(node, 'x');
+			var startOffset = helpers.getSliderOffset(node, 'y');
 			var endOffset = childrenOffsets[slide];
 			var offsetDiff = endOffset - startOffset;
 			
@@ -929,7 +929,7 @@
 			this.currentSlideNumber = newChildOffset + 1;
 			this.targetSlideObject = $(node).children(':eq(' + targetSlideOffset + ')');
 			this.targetSlideNumber = targetSlideOffset + 1;
-			this.currentSliderOffset = helpers.getSliderOffset(node, 'x') * -1;
+			this.currentSliderOffset = helpers.getSliderOffset(node, 'y') * -1;
 		},
 		
 		preventDrag: function(event) {
@@ -963,10 +963,10 @@
 				'snapToChildren': false,
 				'snapSlideCenter': false,
 				'startAtSlide': 1,
-				'scrollbar': false,
+				'scrollbar': true,
 				'scrollbarDrag': false,
-				'scrollbarHide': true,
-				'scrollbarLocation': 'top',
+				'scrollbarHide': false,
+				'scrollbarLocation': 'right',
 				'scrollbarContainer': '',
 				'scrollbarOpacity': 0.4,
 				'scrollbarHeight': '4px',
@@ -1106,7 +1106,7 @@
 				
 				});
 				
-				var newChildOffset = helpers.calcActiveOffset(settings, helpers.getSliderOffset($(scrollerNode), 'x'), childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, undefined, sliderNumber);
+				var newChildOffset = helpers.calcActiveOffset(settings, helpers.getSliderOffset($(scrollerNode), 'y'), childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, undefined, sliderNumber);
 				var tempOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 				
 				var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset, false);
@@ -1139,11 +1139,11 @@
 					
 					sliderMax[sliderNumber] = 0;
 					childrenOffsets = new Array();
-					containerWidth = $(stageNode).parent().width();
-					stageWidth = $(stageNode).outerWidth(true);
+					containerWidth = $(stageNode).parent().height();
+					stageWidth = $(stageNode).outerHeight(true);
 					
 					if(settings.responsiveSlideContainer) {
-						stageWidth = ($(stageNode).outerWidth(true) > containerWidth) ? containerWidth : $(stageNode).outerWidth(true);
+						stageWidth = ($(stageNode).outerHeight(true) > containerWidth) ? containerWidth : $(stageNode).outerWidth(true);
 					}
 
 					$(stageNode).css({
@@ -1163,8 +1163,8 @@
 						
 					for(var j = 0; j < slideNodes.length; j++) {
 						
-						slideNodeWidths[j] = $(slideNodes[j]).width();
-						slideNodeOuterWidths[j] = $(slideNodes[j]).outerWidth(true);
+						slideNodeWidths[j] = $(slideNodes[j]).height();
+						slideNodeOuterWidths[j] = $(slideNodes[j]).outerHeight(true);
 						var newWidth = slideNodeOuterWidths[j];
 						
 						if(settings.responsiveSlides) {
@@ -1281,17 +1281,17 @@
 					
 					if(settings.infiniteSlider && !shortContent) {
 						
-						var currentScrollOffset = helpers.getSliderOffset($(scrollerNode), 'x');
+						var currentScrollOffset = helpers.getSliderOffset($(scrollerNode), 'y');
 						var count = (infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides * -1;
 
 						while(count < 0) {
 								
 							var lowSlideNumber = 0;
-							var lowSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+							var lowSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'y');
 							$(slideNodes).each(function(i) {
 								
-								if(helpers.getSliderOffset(this, 'x') < lowSlideOffset) {
-									lowSlideOffset = helpers.getSliderOffset(this, 'x');
+								if(helpers.getSliderOffset(this, 'y') < lowSlideOffset) {
+									lowSlideOffset = helpers.getSliderOffset(this, 'y');
 									lowSlideNumber = i;
 								}
 								
@@ -1313,11 +1313,11 @@
 						while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > 0) && settings.snapSlideCenter && isFirstInit) {
 							
 							var highSlideNumber = 0;
-							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'y');
 							$(slideNodes).each(function(i) {
 								
-								if(helpers.getSliderOffset(this, 'x') > highSlideOffset) {
-									highSlideOffset = helpers.getSliderOffset(this, 'x');
+								if(helpers.getSliderOffset(this, 'y') > highSlideOffset) {
+									highSlideOffset = helpers.getSliderOffset(this, 'y');
 									highSlideNumber = i;
 								}
 								
@@ -1372,15 +1372,15 @@
 						
 						$('.' + scrollbarBlockClass).css({ 
 							position: 'absolute',
-							left: 0,
+							top: 0,
 							width: scrollbarStageWidth - scrollMargin + 'px',
 							margin: settings.scrollbarMargin
 						});
 						
-						if(settings.scrollbarLocation == 'top') {
-							$('.' + scrollbarBlockClass).css('top', '0');
+						if(settings.scrollbarLocation == 'right') {
+							$('.' + scrollbarBlockClass).css('right', '0');
 						} else {
-							$('.' + scrollbarBlockClass).css('bottom', '0');
+							$('.' + scrollbarBlockClass).css('left', '0');
 						}
 						
 						$('.' + scrollbarBlockClass + ' .' + scrollbarClass).css({ 
@@ -1686,7 +1686,7 @@
 							clearTimeout(scrollTimeouts[j]);
 						}
 						
-						var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
+						var scrollPosition = helpers.getSliderOffset(scrollerNode, 'y');
 
 						if(scrollPosition > (sliderMin[sliderNumber] * -1 + centeredSlideOffset + scrollerWidth)) {
 							
@@ -1712,7 +1712,7 @@
 						
 						var scrollbarSubtractor = ($(this)[0] === $(scrollbarNode)[0]) ? (sliderMin[sliderNumber]) : 0;
 						
-						xScrollStartPosition = (helpers.getSliderOffset(this, 'x') - eventX - scrollbarSubtractor) * -1;
+						xScrollStartPosition = (helpers.getSliderOffset(this, 'y') - eventX - scrollbarSubtractor) * -1;
 						yScrollStartPosition = (helpers.getSliderOffset(this, 'y') - eventY) * -1;
 						
 						xCurrentScrollRate[1] = eventX;
@@ -1806,7 +1806,7 @@
 						
 						if(xScrollStarted && !preventXScroll) {
 							
-							var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
+							var scrollPosition = helpers.getSliderOffset(scrollerNode, 'y');
 							var scrollbarSubtractor = ($(this)[0] === $(scrollbarBlockNode)[0]) ? (sliderMin[sliderNumber]) : 0;
 							var scrollbarMultiplier = ($(this)[0] === $(scrollbarBlockNode)[0]) ? ((sliderMin[sliderNumber] - sliderMax[sliderNumber]) / (scrollbarStageWidth - scrollMargin - scrollbarWidth)) : 1;
 							var elasticPullResistance = ($(this)[0] === $(scrollbarBlockNode)[0]) ? settings.scrollbarElasticPullResistance : settings.elasticPullResistance;
@@ -1846,11 +1846,11 @@
 									} else {
 										
 										var lowSlideNumber = 0;
-										var lowSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+										var lowSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'y');
 										$(slideNodes).each(function(i) {
 											
-											if(helpers.getSliderOffset(this, 'x') < lowSlideOffset) {
-												lowSlideOffset = helpers.getSliderOffset(this, 'x');
+											if(helpers.getSliderOffset(this, 'y') < lowSlideOffset) {
+												lowSlideOffset = helpers.getSliderOffset(this, 'y');
 												lowSlideNumber = i;
 											}
 											
@@ -1896,11 +1896,11 @@
 										while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > 0)) {
 				
 											var highSlideNumber = 0;
-											var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+											var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'y');
 											$(slideNodes).each(function(i) {
 												
-												if(helpers.getSliderOffset(this, 'x') > highSlideOffset) {
-													highSlideOffset = helpers.getSliderOffset(this, 'x');
+												if(helpers.getSliderOffset(this, 'y') > highSlideOffset) {
+													highSlideOffset = helpers.getSliderOffset(this, 'y');
 													highSlideNumber = i;
 												}
 												
@@ -1923,11 +1923,11 @@
 									} else {
 
 										var highSlideNumber = 0;
-										var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+										var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'y');
 										$(slideNodes).each(function(i) {
 											
-											if(helpers.getSliderOffset(this, 'x') > highSlideOffset) {
-												highSlideOffset = helpers.getSliderOffset(this, 'x');
+											if(helpers.getSliderOffset(this, 'y') > highSlideOffset) {
+												highSlideOffset = helpers.getSliderOffset(this, 'y');
 												highSlideNumber = i;
 											}
 											

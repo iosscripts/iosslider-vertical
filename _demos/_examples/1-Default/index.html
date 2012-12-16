@@ -10,8 +10,8 @@
 		
 		<style type="text/css">
 			.iosSlider {
-				width: 900px;
-				height: 400px;
+				width: 400px;
+				height: 500px;
 			}
 			
 			.iosSlider .slider {
@@ -24,26 +24,26 @@
 				top: 0;
 				left: 0;
 				
-				width: 900px;
-				height: 300px;
+				width: 400px;
+				height: 500px;
 				background: #fff;
 				margin: 0 0 0 0;
 			}
 			
 			.iosSlider .slider #item1 {
-				background: url(h-slider-1.jpg) no-repeat 0 0;
+				background: #aaa;
 			}
 			
 			.iosSlider .slider #item2 {
-				background: url(h-slider-2.jpg) no-repeat 0 0;
+				background: #ddd;
 			}
 			
 			.iosSlider .slider #item3 {
-				background: url(h-slider-3.jpg) no-repeat 0 0;
+				background: #666;
 			}
 			
 			.iosSlider .slider #item4 {
-				background: url(h-slider-4.jpg) no-repeat 0 0;
+				background: #999;
 			}
 		</style>
 		
@@ -57,7 +57,10 @@
 			$(document).ready(function() {
 			
 				$('.iosSlider').iosSlider({
-					desktopClickDrag: true
+					desktopClickDrag: true,
+					stageCSS: {
+						overflow: 'visible'
+					}
 				});
 				
 			});
