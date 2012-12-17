@@ -296,7 +296,7 @@
 					helpers.setSliderOffset($('.' + scrollbarClass), 0);
 					
 					$('.' + scrollbarClass).css({
-						width: width + 'px'
+						height: width + 'px'
 					});
 				
 				} else if(newOffset <= ((sliderMax[sliderNumber] * -1) + 1)) {
@@ -306,7 +306,7 @@
 					helpers.setSliderOffset($('.' + scrollbarClass), scrollbarDistance);
 					
 					$('.' + scrollbarClass).css({
-						width: width + 'px'
+						height: width + 'px'
 					});
 					
 				} else {
@@ -314,7 +314,7 @@
 					helpers.setSliderOffset($('.' + scrollbarClass), scrollbarDistance);
 					
 					$('.' + scrollbarClass).css({
-						width: width + 'px'
+						height: width + 'px'
 					});
 				
 				}
@@ -1143,7 +1143,7 @@
 					stageWidth = $(stageNode).outerHeight(true);
 					
 					if(settings.responsiveSlideContainer) {
-						stageWidth = ($(stageNode).outerHeight(true) > containerWidth) ? containerWidth : $(stageNode).outerWidth(true);
+						stageWidth = ($(stageNode).outerHeight(true) > containerWidth) ? containerWidth : $(stageNode).outerHeight(true);
 					}
 
 					$(stageNode).css({
@@ -1154,7 +1154,7 @@
 						zIndex: settings.stageCSS.zIndex,
 						'webkitPerspective': 1000,
 						'webkitBackfaceVisibility': 'hidden',
-						width: stageWidth
+						height: stageWidth
 					});
 					
 					$(settings.unselectableSelector).css({
@@ -1180,7 +1180,7 @@
 							}
 							
 							$(slideNodes[j]).css({
-								width: newWidth
+								height: newWidth
 							});
 					
 						}
@@ -1250,7 +1250,7 @@
 						cursor: grabOutCursor,
 						'webkitPerspective': '0',
 						'webkitBackfaceVisibility': 'hidden',
-						width: sliderMax[sliderNumber] + 'px'
+						height: sliderMax[sliderNumber] + 'px'
 					});
 					
 					scrollerWidth = sliderMax[sliderNumber];
@@ -1266,15 +1266,15 @@
 						
 					}
 					
-					containerHeight = $(stageNode).parent().outerHeight(true);
-					stageHeight = $(stageNode).height();
+					containerHeight = $(stageNode).parent().outerWidth(true);
+					stageHeight = $(stageNode).width();
 					
 					if(settings.responsiveSlideContainer) {
 						stageHeight = (stageHeight > containerHeight) ? containerHeight : stageHeight;
 					}
 					
 					$(stageNode).css({
-						height: stageHeight
+						width: stageHeight
 					});
 
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
@@ -1363,7 +1363,7 @@
 						
 						scrollMargin = parseInt($('.' + scrollbarBlockClass).css('marginLeft')) + parseInt($('.' + scrollbarBlockClass).css('marginRight'));
 						scrollBorder = parseInt($('.' + scrollbarBlockClass + ' .' + scrollbarClass).css('borderLeftWidth'), 10) + parseInt($('.' + scrollbarBlockClass + ' .' + scrollbarClass).css('borderRightWidth'), 10);
-						scrollbarStageWidth = (settings.scrollbarContainer != '') ? $(settings.scrollbarContainer).width() : stageWidth;
+						scrollbarStageWidth = (settings.scrollbarContainer != '') ? $(settings.scrollbarContainer).height() : stageWidth;
 						scrollbarWidth = (scrollbarStageWidth - scrollMargin) / numberOfSlides;
 		
 						if(!settings.scrollbarHide) {
@@ -1373,7 +1373,7 @@
 						$('.' + scrollbarBlockClass).css({ 
 							position: 'absolute',
 							top: 0,
-							width: scrollbarStageWidth - scrollMargin + 'px',
+							height: scrollbarStageWidth - scrollMargin + 'px',
 							margin: settings.scrollbarMargin
 						});
 						
@@ -1386,9 +1386,9 @@
 						$('.' + scrollbarBlockClass + ' .' + scrollbarClass).css({ 
 							borderRadius: settings.scrollbarBorderRadius,
 							background: settings.scrollbarBackground,
-							height: settings.scrollbarHeight,
-							width: scrollbarWidth - scrollBorder + 'px',
-							minWidth: settings.scrollbarHeight,
+							width: settings.scrollbarHeight,
+							height: scrollbarWidth - scrollBorder + 'px',
+							minHeight: settings.scrollbarHeight,
 							border: settings.scrollbarBorder,
 							'webkitPerspective': 1000,
 							'webkitBackfaceVisibility': 'hidden',
@@ -1660,8 +1660,8 @@
 								document.selection.empty();
 							}
 							
-							eventX = e.pageX;
-							eventY = e.pageY;
+							eventX = e.pageY;
+							eventY = e.pageX;
 							
 							isMouseDown = true;
 							currentSlider = scrollerNode;
@@ -1672,8 +1672,8 @@
 							
 						} else {
 						
-							eventX = e.touches[0].pageX;
-							eventY = e.touches[0].pageY;
+							eventX = e.touches[0].pageY;
+							eventY = e.touches[0].pageX;
 
 						}
 						
@@ -1695,7 +1695,7 @@
 							helpers.setSliderOffset($('.' + scrollbarClass), scrollPosition);
 							
 							$('.' + scrollbarClass).css({
-								width: (scrollbarWidth - scrollBorder) + 'px'
+								height: (scrollbarWidth - scrollBorder) + 'px'
 							});
 							
 						} else if(scrollPosition < (sliderMax[sliderNumber] * -1)) {
@@ -1705,7 +1705,7 @@
 							helpers.setSliderOffset($('.' + scrollbarClass), (scrollbarStageWidth - scrollMargin - scrollbarWidth));
 							
 							$('.' + scrollbarClass).css({
-								width: (scrollbarWidth - scrollBorder) + 'px'
+								height: (scrollbarWidth - scrollBorder) + 'px'
 							});
 							
 						} 
@@ -1751,11 +1751,11 @@
 						}
 						
 						if(isTouch) {
-							eventX = e.touches[0].pageX;
-							eventY = e.touches[0].pageY;
+							eventX = e.touches[0].pageY;
+							eventY = e.touches[0].pageX;
 						} else {
-							eventX = e.pageX;
-							eventY = e.pageY;
+							eventX = e.pageY;
+							eventY = e.pageX;
 							
 							if(!isMouseDown) {
 								return false;
@@ -1823,7 +1823,7 @@
 
 								if(scrollPosition <= (sliderMax[sliderNumber] * -1)) {
 									
-									var scrollerWidth = $(scrollerNode).width();
+									var scrollerWidth = $(scrollerNode).height();
 									
 									if(scrollPosition <= (sliderAbsMax[sliderNumber] * -1)) {
 										
@@ -1834,7 +1834,7 @@
 											if(i < childrenOffsets.length) {
 												childrenOffsets[i] = sum * -1;
 											}
-											sum = sum + $(this).outerWidth(true);
+											sum = sum + $(this).outerHeight(true);
 											
 										});
 										
@@ -1873,7 +1873,7 @@
 								
 								if((scrollPosition >= (sliderMin[sliderNumber] * -1)) || (scrollPosition >= 0)) {
 		
-									var scrollerWidth = $(scrollerNode).width();
+									var scrollerWidth = $(scrollerNode).height();
 									
 									if(scrollPosition >= 0) {
 									
@@ -1884,7 +1884,7 @@
 											if(i < childrenOffsets.length) {
 												childrenOffsets[i] = sum * -1;
 											}
-											sum = sum + $(this).outerWidth(true);
+											sum = sum + $(this).outerHeight(true);
 											
 										});
 										
@@ -1906,7 +1906,7 @@
 												
 											});
 				
-											var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth(true);
+											var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerHeight(true);
 											helpers.setSliderOffset($(slideNodes)[highSlideNumber], newOffset);
 											
 											childrenOffsets.splice(0, 0, newOffset * -1 + centeredSlideOffset);
@@ -1933,7 +1933,7 @@
 											
 										});
 										
-										var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth(true);
+										var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerHeight(true);
 										helpers.setSliderOffset($(slideNodes)[highSlideNumber], newOffset);									
 										
 										childrenOffsets.splice(0, 0, newOffset * -1 + centeredSlideOffset);
@@ -1950,7 +1950,7 @@
 								
 							} else {
 								
-								var scrollerWidth = $(scrollerNode).width();
+								var scrollerWidth = $(scrollerNode).height();
 								
 								if(scrollPosition > (sliderMin[sliderNumber] * -1 + centeredSlideOffset)) {
 
@@ -1983,7 +1983,7 @@
 									helpers.setSliderOffset($('.' + scrollbarClass), 0);
 									
 									$('.' + scrollbarClass).css({
-										width: width + 'px'
+										height: width + 'px'
 									});
 									
 								} else if(scrollPosition <= ((sliderMax[sliderNumber] * -1) + 1)) {
@@ -1993,7 +1993,7 @@
 									helpers.setSliderOffset($('.' + scrollbarClass), scrollbarDistance);
 									
 									$('.' + scrollbarClass).css({
-										width: width + 'px'
+										height: width + 'px'
 									});
 									
 								} else {
