@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.1.0 (beta) (12/16/2012)
+ * Version: v0.1.1 (beta) (12/18/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -264,9 +264,8 @@
 			}
 			
 			if(slideChanged) {
-				
-				var startOffset = activeChildInfOffsets[sliderNumber];
-				var args = new helpers.args(settings, node, $(node).children(':eq(' + tempOffset + ')'), startOffset, endOffset, true);
+
+				var args = new helpers.args(settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, endOffset, true);
 				$(node).parent().data('args', args);
 				
 				if(settings.onSlideChange != '') {
@@ -930,6 +929,18 @@
 			this.targetSlideObject = $(node).children(':eq(' + targetSlideOffset + ')');
 			this.targetSlideNumber = targetSlideOffset + 1;
 			this.currentSliderOffset = helpers.getSliderOffset(node, 'y') * -1;
+			
+			try {
+				if($(node).parent().data('args') == undefined) {
+					this.prevSlideNumber = settings.startAtSlide;
+				} else if($(node).parent().data('args').prevSlideNumber == this.currentSlideNumber) {
+					this.prevSlideNumber = $(node).parent().data('args').currentSlideNumber;					
+				} else {
+					this.prevSlideNumber = $(node).parent().data('args').prevSlideNumber;
+				}
+				
+				this.prevSlideObject = $(node).children(':eq(' + this.prevSlideNumber + ')');
+			} catch(e) {}
 		},
 		
 		preventDrag: function(event) {
@@ -1237,9 +1248,14 @@
 					}
 					
 					if(isFirstInit) {
-						settings.startAtSlide = (settings.startAtSlide > childrenOffsets.length) ? childrenOffsets.length : settings.startAtSlide;
-						settings.startAtSlide = ((settings.startAtSlide - 1) < 0) ? childrenOffsets.length-1 : settings.startAtSlide;
-						activeChildOffsets[sliderNumber] = (settings.startAtSlide-1);
+						settings.startAtSlide = (iosSliderSettings[sliderNumber].startAtSlide > childrenOffsets.length) ? childrenOffsets.length : iosSliderSettings[sliderNumber].startAtSlide;
+						if(settings.infiniteSlider) {
+							settings.startAtSlide = (iosSliderSettings[sliderNumber].startAtSlide - 1 + numberOfSlides)%numberOfSlides;
+							activeChildOffsets[sliderNumber] = (iosSliderSettings[sliderNumber].startAtSlide);
+						} else {
+							settings.startAtSlide = ((iosSliderSettings[sliderNumber].startAtSlide - 1) < 0) ? childrenOffsets.length-1 : iosSliderSettings[sliderNumber].startAtSlide;	
+							activeChildOffsets[sliderNumber] = (iosSliderSettings[sliderNumber].startAtSlide-1);
+						}
 						activeChildInfOffsets[sliderNumber] = activeChildOffsets[sliderNumber];
 					}
 					
@@ -2028,12 +2044,11 @@
 							
 							if(slideChanged) {
 								
-								var startOffset = activeChildInfOffsets[sliderNumber];
 								activeChildOffsets[sliderNumber] = newChildOffset;
 								activeChildInfOffsets[sliderNumber] = tempOffset;
 								snapOverride = true;
 								
-								var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), startOffset, tempOffset, true);
+								var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset, true);
 								$(stageNode).data('args', args);
 								
 								if(settings.onSlideChange != '') {
@@ -2291,15 +2306,29 @@
 						$(data.scrollerNode).children(':eq(' + (slidePosition - 2) + ')').after(slideNode);
 					}
 					
-					if(activeChildOffsets[data.sliderNumber] > (slidePosition - 2)) {
-						activeChildOffsets[data.sliderNumber]++;
+					if($this.data('args').currentSlideNumber >= slidePosition) {
+						$this.data('args').currentSlideNumber++;
 					}
 					
 				} else {
-				
-					$(data.scrollerNode).children(':eq(' + (slidePosition - 2) + ')').after(slideNode);
-
+					
+					if(slidePosition == 1) {
+						$(data.scrollerNode).children(':eq(0)').before(slideNode);
+					} else {
+						$(data.scrollerNode).children(':eq(' + (slidePosition - 2) + ')').after(slideNode);
+					}
+					
+					if((infiniteSliderOffset[data.sliderNumber] < -1) && (true)) {
+						activeChildOffsets[data.sliderNumber]--;
+					}
+					
+					if($this.data('args').currentSlideNumber >= slidePosition) {
+						activeChildOffsets[data.sliderNumber]++;
+					}
+					
 				}
+					
+				$this.data('iosslider').numberOfSlides++;
 				
 				methods.update(this);
 			
