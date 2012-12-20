@@ -2227,6 +2227,7 @@
 		    	$(window).unbind('.iosSliderEvent-' + data.sliderNumber);
 		    	$(document).unbind('.iosSliderEvent-' + data.sliderNumber);
 		    	$(this).unbind('.iosSliderEvent');
+		    	$(document).unbind('keydown.iosSliderEvent');
 	    		$(this).children(':first-child').unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').children().unbind('.iosSliderEvent');
 		    	
