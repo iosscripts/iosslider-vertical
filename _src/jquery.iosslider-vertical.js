@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.1.3 (beta) (01/02/2013)
+ * Version: v0.1.4 (beta) (01/20/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1204,7 +1204,7 @@
 						
 						childrenOffsets[j] = sliderMax[sliderNumber] * -1;
 						
-						sliderMax[sliderNumber] = sliderMax[sliderNumber] + newWidth;
+						sliderMax[sliderNumber] = sliderMax[sliderNumber] + newWidth + (slideNodeOuterWidths[j] - slideNodeWidths[j]);
 					
 					}
 					
@@ -2274,8 +2274,8 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
-				methods.destroy(false, this);
 				data.settings.startAtSlide = $this.data('args').currentSlideNumber;
+				methods.destroy(false, this);
 				
 				if((data.numberOfSlides != 1) && data.settings.infiniteSlider) {
 				 	data.settings.startAtSlide = (activeChildOffsets[data.sliderNumber] + 1 + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
