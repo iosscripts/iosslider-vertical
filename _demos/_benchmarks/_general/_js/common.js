@@ -1,6 +1,9 @@
 $(document).ready(function() {
 	
-	$('.default-slider').iosSlider({
+	$('.debug #touch').html('isTouch: <strong>' + ('ontouchstart' in window) + '</strong>');
+	$('.debug #orientation').html('orientationChange: <strong>' + ('onorientationchange' in window) + '</strong>');
+	
+	$('.default-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		navNextSelector: $('.default-slider .next'),
 		navPrevSelector: $('.default-slider .prev')
@@ -8,36 +11,36 @@ $(document).ready(function() {
 	
 	$('.default-slider-container .goToBlock .go').each(function(i) {
 		$(this).bind('click', function() {
-			$('.default-slider').iosSlider('goToSlide', i + 1);
+			$('.default-slider').iosslider-vertical('goToSlide', i + 1);
 		});
 	});
 	
-	$('.snap-slider').iosSlider({
+	$('.snap-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
 	});
 	
-	$('.infinite-slider').iosSlider({
+	$('.infinite-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true
 	});
 	
-	$('.responsive-slider').iosSlider({
+	$('.responsive-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true,
 		responsiveSlideContainer: false
 	});
 	
-	$('.responsive-slider-2').iosSlider({
+	$('.responsive-slider-2').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true,
 		responsiveSlides: false
 	});
 	
-	$('.autoslide-slider1').iosSlider({
+	$('.autoslide-slider1').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		autoSlide: true,
@@ -45,7 +48,7 @@ $(document).ready(function() {
 		scrollbar: true
 	});
 	
-	$('.autoslide-slider2').iosSlider({
+	$('.autoslide-slider2').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true,
@@ -58,21 +61,70 @@ $(document).ready(function() {
 	
 	$('.autoslide-slider2-container .goToBlock .go').each(function(i) {
 		$(this).bind('click', function() {
-			$('.autoslide-slider2').iosSlider('goToSlide', i + 1);
+			$('.autoslide-slider2').iosslider-vertical('goToSlide', i + 1);
 		});
 	});
 	
-	$('.variable-width-slider').iosSlider({
+	$('.autoslide-slider4').iosSliderVertical({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true,
+		autoSlide: false,
+		autoSlideTimer: 2000,
+		startAtSlide: '2',
+		scrollbar: true,
+		navNextSelector: $('.autoslide-slider4 .next'),
+		navPrevSelector: $('.autoslide-slider4 .prev')
+	});
+	
+	$('.autoslide-slider4-container .goToBlock .go').eq(0).bind('click', function() {
+
+		$('.autoslide-slider4').iosslider-vertical('autoSlidePlay');
+	
+	});
+
+	$('.autoslide-slider4-container .goToBlock .go').eq(1).bind('click', function() {
+
+		$('.autoslide-slider4').iosslider-vertical('autoSlidePause');
+	
+	});
+	
+	$('.autoslide-slider5').iosSliderVertical({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true,
+		autoSlide: true,
+		autoSlideTimer: 2000,
+		startAtSlide: '2',
+		scrollbar: true,
+		navNextSelector: $('.autoslide-slider4 .next'),
+		navPrevSelector: $('.autoslide-slider4 .prev'),
+		autoSlideToggleSelector: $('.autoslide-slider5-container .goToBlock .go:eq(2)')
+	});
+	
+	$('.autoslide-slider5-container .goToBlock .go').eq(0).bind('click', function() {
+
+		$('.autoslide-slider5').iosslider-vertical('autoSlidePlay');
+	
+	});
+
+	$('.autoslide-slider5-container .goToBlock .go').eq(1).bind('click', function() {
+
+		$('.autoslide-slider5').iosslider-vertical('autoSlidePause');
+	
+	});
+	
+	$('.variable-width-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
 	});
 	
-	$('.short-width-slider').iosSlider({
+	$('.short-width-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
 	});
 	
-	$('.short-width-slider-2').iosSlider({
+	$('.short-width-slider-2').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true,
@@ -80,12 +132,12 @@ $(document).ready(function() {
 		navPrevSelector: '.short-width-slider-2 .prev'
 	});
 	
-	$('.short-width-slider-3').iosSlider({
+	$('.short-width-slider-3').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
 	});
 	
-	$('.autoslide-slider3').iosSlider({
+	$('.autoslide-slider3').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true,
@@ -95,7 +147,7 @@ $(document).ready(function() {
 		navPrevSelector: $('.autoslide-slider3 .prev')
 	});
 	
-	$('.destroy-slider').iosSlider({
+	$('.destroy-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true,
@@ -106,14 +158,14 @@ $(document).ready(function() {
 	
 	$('.destroy-slider-container .goToBlock .go').each(function(i) {
 		$(this).bind('click', function() {
-			$('.destroy-slider').iosSlider('goToSlide', i + 1);
+			$('.destroy-slider').iosslider-vertical('goToSlide', i + 1);
 		});
 	});
 	
 	$('.destroy-slider-container .destInitBlock .dest').each(function(i) {
 	
 		$(this).bind('click', function() {
-			$('.destroy-slider').iosSlider('destroy');
+			$('.destroy-slider').iosslider-vertical('destroy');
 		});
 	
 	});
@@ -121,7 +173,7 @@ $(document).ready(function() {
 	$('.destroy-slider-container .destInitBlock .init').each(function(i) {
 	
 		$(this).bind('click', function() {
-			$('.destroy-slider').iosSlider({
+			$('.destroy-slider').iosSliderVertical({
 				desktopClickDrag: true,
 				snapToChildren: true,
 				infiniteSlider: true,
@@ -133,7 +185,7 @@ $(document).ready(function() {
 	
 	});
 	
-	$('.callback-slider').iosSlider({
+	$('.callback-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true,
@@ -149,7 +201,7 @@ $(document).ready(function() {
 	$('.callback-slider-container .destInitBlock .dest').each(function(i) {
 	
 		$(this).bind('click', function() {
-			$('.callback-slider').iosSlider('destroy');
+			$('.callback-slider').iosslider-vertical('destroy');
 		});
 	
 	});
@@ -157,7 +209,7 @@ $(document).ready(function() {
 	$('.callback-slider-container .destInitBlock .update').each(function(i) {
 	
 		$(this).bind('click', function() {
-			$('.callback-slider').iosSlider('update');
+			$('.callback-slider').iosslider-vertical('update');
 		});
 	
 	});
@@ -165,7 +217,7 @@ $(document).ready(function() {
 	$('.callback-slider-container .destInitBlock .init').each(function(i) {
 	
 		$(this).bind('click', function() {
-			$('.callback-slider').iosSlider({
+			$('.callback-slider').iosSliderVertical({
 				desktopClickDrag: true,
 				snapToChildren: true,
 				infiniteSlider: true,
@@ -179,34 +231,34 @@ $(document).ready(function() {
 	
 	$('.callback-slider-container .goToBlock .go').each(function(i) {
 		$(this).bind('click', function() {
-			$('.callback-slider').iosSlider('goToSlide', i + 1);
+			$('.callback-slider').iosslider-vertical('goToSlide', i + 1);
 		});
 	});
 	
-	$('.full-width-slider').iosSlider({
+	$('.full-width-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true
 	});
 	
-	$('.form-slider').iosSlider({
+	$('.form-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true
 	});
 	
-	$('.media-query-slider').iosSlider({
+	$('.media-query-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true
 	});
 	
-	$('.thirty-slider').iosSlider({
+	$('.thirty-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
 	});
 	
-	$('.undefined-height-slider').iosSlider({
+	$('.undefined-height-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
 	});
@@ -215,26 +267,26 @@ $(document).ready(function() {
 		window.open('http://google.ca');
 	});
 	
-	$('.bind-event-slider').iosSlider({
+	$('.bind-event-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true
 	});
 	
-	$('.image-drag-slider').iosSlider({
+	$('.image-drag-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true
 	});
 	
-	$('.add-remove-slide-slider').iosSlider({
+	$('.add-remove-slide-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		scrollbar: true,
 		scrollbarHide: false
 	});
 	
-	$('.short-content-slider').iosSlider({
+	$('.short-content-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
 	});
@@ -247,17 +299,17 @@ $(document).ready(function() {
 			'src': '../../_site-demo/_img/h-slider-1.jpg'
 		}));
 		
-		$('.add-remove-slide-slider').iosSlider('addSlide', slide, 1);
+		$('.add-remove-slide-slider').iosslider-vertical('addSlide', slide, 1);
 	
 	});
 	
 	$('.add-remove-slide-slider-container .destInitBlock .rem').bind('click', function() {
 	
-		$('.add-remove-slide-slider').iosSlider('removeSlide', 1);
+		$('.add-remove-slide-slider').iosslider-vertical('removeSlide', 1);
 	
 	});
 	
-	$('.drag-scrollbar-slider').iosSlider({
+	$('.drag-scrollbar-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		scrollbarDrag: true,
@@ -268,7 +320,7 @@ $(document).ready(function() {
 		scrollbarOpacity: 1
 	});
 	
-	$('.drag-scrollbar-slider-2').iosSlider({
+	$('.drag-scrollbar-slider-2').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		scrollbarDrag: true,
@@ -280,54 +332,60 @@ $(document).ready(function() {
 		scrollbarOpacity: 1
 	});
 	
-	$('.lock-slider').iosSlider({
+	$('.lock-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
 	});
 	
 	$('.lock-slider-container .destInitBlock .lock').bind('click', function() {
 		
-		$('.lock-slider').iosSlider('lock');
+		$('.lock-slider').iosslider-vertical('lock');
 	
 	});
 	
 	$('.lock-slider-container .destInitBlock .unlock').bind('click', function() {
 	
-		$('.lock-slider').iosSlider('unlock');
+		$('.lock-slider').iosslider-vertical('unlock');
 	
 	});
 	
-	$('.unselectable-slider').iosSlider({
+	$('.unselectable-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		unselectableSelector: '.unselectable'
 	});
 	
-	$('.scrollbar-y-slider').iosSlider({
+	$('.scrollbar-y-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
 	});
 	
-	$('.keyboard-control-slider').iosSlider({
+	$('.keyboard-control-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		keyboardControls: true
 	});
 	
-	$('.snap-center-slider').iosSlider({
+	$('.tab-control-slider').iosSliderVertical({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		tabToAdvance: true
+	});
+	
+	$('.snap-center-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		snapSlideCenter: true
 	});
 	
-	$('.snap-center-slider-2').iosSlider({
+	$('.snap-center-slider-2').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		snapSlideCenter: true,
 		infiniteSlider: true
 	});
 	
-	$('.snap-center-slider-3').iosSlider({
+	$('.snap-center-slider-3').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		snapSlideCenter: true

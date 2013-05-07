@@ -9,7 +9,7 @@ p {
 }
 
 .debug {
-	position: fixed;
+	/*position: fixed;
 	bottom: 0;
 	right: 0;
 	width: 200px;
@@ -17,7 +17,14 @@ p {
 	background: #fff;
 	border: 1px solid #000;
 	z-index: 20;
-	display: none;
+	display: none;*/
+	
+	padding: 10px 0;
+}
+
+.debug ul {
+	margin: 10px 0 10px 30px;
+	list-style-type: disc;
 }
 
 /* defalut */
@@ -259,7 +266,9 @@ p {
 /* autoslide */
 .autoslide-slider1,
 .autoslide-slider2,
-.autoslide-slider3 {
+.autoslide-slider3,
+.autoslide-slider4,
+.autoslide-slider5 {
 	position: relative;
 	overflow: hidden;
 	width: 900px;
@@ -268,13 +277,17 @@ p {
 
 .autoslide-slider1 .slider,
 .autoslide-slider2 .slider,
-.autoslide-slider3 .slider {
+.autoslide-slider3 .slider,
+.autoslide-slider4 .slider,
+.autoslide-slider5 .slider {
 	height: 100%;
 }
 
 .autoslide-slider1 .slider .item,
 .autoslide-slider2 .slider .item,
-.autoslide-slider3 .slider .item {
+.autoslide-slider3 .slider .item,
+.autoslide-slider4 .slider .item,
+.autoslide-slider5 .slider .item {
 	width: 900px;
 	height: 100%;
 }
@@ -291,35 +304,46 @@ p {
 
 .autoslide-slider1 .slider #item1,
 .autoslide-slider2 .slider #item1,
-.autoslide-slider3 .slider #item1 {
+.autoslide-slider3 .slider #item1,
+.autoslide-slider4 .slider #item1,
+.autoslide-slider5 .slider #item1 {
 	background: #666;
 }
 
 .autoslide-slider1 .slider #item2,
 .autoslide-slider2 .slider #item2,
-.autoslide-slider3 .slider #item2 {
+.autoslide-slider3 .slider #item2,
+.autoslide-slider4 .slider #item2,
+.autoslide-slider5 .slider #item2 {
 	background: #999;
 }
 
 .autoslide-slider1 .slider #item3,
 .autoslide-slider2 .slider #item3,
-.autoslide-slider3 .slider #item3 {
+.autoslide-slider3 .slider #item3,
+.autoslide-slider4 .slider #item3,
+.autoslide-slider5 .slider #item3 {
 	background: #aaa;
 }
 
 .autoslide-slider1 .slider #item4,
 .autoslide-slider2 .slider #item4,
-.autoslide-slider3 .slider #item4 {
+.autoslide-slider3 .slider #item4,
+.autoslide-slider4 .slider #item4,
+.autoslide-slider5 .slider #item4 {
 	background: #ddd;
 }
 
 .autoslide-slider1 .slider #item5,
 .autoslide-slider2 .slider #item5,
-.autoslide-slider3 .slider #item5 {
+.autoslide-slider3 .slider #item5,
+.autoslide-slider4 .slider #item5,
+.autoslide-slider5 .slider #item5 {
 	background: #777;
 }
 
-.autoslide-slider2-container {
+.autoslide-slider2-container, 
+.autoslide-slider4-container {
 	position: relative;
 	top: 0;
 	left: 0;
@@ -327,7 +351,8 @@ p {
 	height: 200px;
 }
 
-.autoslide-slider2-container .goToBlock {
+.autoslide-slider2-container .goToBlock,
+.autoslide-slider4-container .goToBlock {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -335,7 +360,8 @@ p {
 	height: 200px;
 }
 
-.autoslide-slider2-container .goToBlock .go {
+.autoslide-slider2-container .goToBlock .go,
+.autoslide-slider4-container .goToBlock .go {
 	width: 36px;
 	height: 36px;
 	background: #aaa;
@@ -344,7 +370,8 @@ p {
 }
 
 .autoslide-slider2 .next,
-.autoslide-slider3 .next {
+.autoslide-slider3 .next,
+.autoslide-slider4 .next {
 	position: absolute;
 	top: 79px;
 	right: 10px;
@@ -355,7 +382,8 @@ p {
 }
 
 .autoslide-slider2 .prev,
-.autoslide-slider3 .prev {
+.autoslide-slider3 .prev,
+.autoslide-slider4 .prev {
 	position: absolute;
 	top: 79px;
 	left: 10px;
@@ -1327,6 +1355,48 @@ p {
 }
 
 .keyboard-control-slider .slider .item6 {
+	background: #000;
+}
+
+/* tab control slider */
+.tab-control-slider {
+	position: relative;
+	overflow: hidden;
+	width: 900px;
+	height: 200px;
+}
+
+.tab-control-slider .slider {
+	width: 100%;
+	height: 100%;
+}
+
+.tab-control-slider .slider .item {
+	width: 900px;
+	height: 200px;
+}
+
+.tab-control-slider .slider .item1 {
+	background: #666;
+}
+
+.tab-control-slider .slider .item2 {
+	background: #999;
+}
+
+.tab-control-slider .slider .item3 {
+	background: #aaa;
+}
+
+.tab-control-slider .slider .item4 {
+	background: #ddd;
+}
+
+.tab-control-slider .slider .item5 {
+	background: #999;
+}
+
+.tab-control-slider .slider .item6 {
 	background: #000;
 }
 

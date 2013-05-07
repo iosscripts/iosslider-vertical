@@ -1,0 +1,71 @@
+body {
+	width: 100%;
+	overflow: hidden;
+}
+
+.containerOuter {
+	position: absolute;
+	left: 0;
+	right: 0;
+	background: #aaa;
+	height: 200px;
+	overflow: hidden;
+}
+
+.container {
+	position: relative;
+	width: 100%;
+	height: 200px;
+	margin: 0 auto;
+	overflow: visible;
+}
+
+.container .iosslider-verticalContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 200px;
+	margin: 0 0 0 0;
+	overflow: visible;
+}
+
+.iosslider-vertical {
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow: visible;
+	width: 100%;
+	height: 200px;
+}
+
+.iosslider-vertical .slider {
+	width: 10000px;
+	height: 100%;
+}
+
+.iosslider-vertical .slider .item {
+	float: left;
+	width: 1000px;
+	height: 100%;
+}
+
+.iosslider-vertical .slider .item1 {
+	background: url(../../../../_resources/h-slider-1.jpg) no-repeat 50% 0;
+}
+
+.iosslider-vertical .slider .item2 {
+	background: url(../../../../_resources/h-slider-2.jpg) no-repeat 50% 0;
+}
+
+.iosslider-vertical .slider .item3 {
+	background: url(../../../../_resources/h-slider-3.jpg) no-repeat 50% 0;
+}
+
+.iosslider-vertical .slider .item4 {
+	background: url(../../../../_resources/h-slider-4.jpg) no-repeat 50% 0;
+}
+
+.iosslider-vertical .slider .item5 {
+	background: url(../../../../_resources/h-slider-5.jpg) no-repeat 50% 0;
+}

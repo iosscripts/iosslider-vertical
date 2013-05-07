@@ -1,4 +1,5 @@
+.DS_Store
 
-_src/jquery.iosslider.js
+_demos/.DS_Store
 
-_src/jquery.iosslider.js
+.gitignore
