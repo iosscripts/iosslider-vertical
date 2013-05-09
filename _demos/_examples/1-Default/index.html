@@ -49,6 +49,7 @@
 		
 		<!-- jQuery library -->
 		<script type="text/javascript" src = "../../../_lib/jquery-1.4.min.js"></script>
+		<script src = "../../../_lib/jquery.mousewheel.js"></script>
 		
 		<!-- iosSlider plugin -->
 		<script src = "../../../_src/jquery.iosslider-vertical.js"></script>
@@ -57,7 +58,8 @@
 			$(document).ready(function() {
 			
 				$('.iosslider-vertical').iosSliderVertical({
-					desktopClickDrag: true
+					desktopClickDrag: true,
+					keyboardControls: true
 				});
 				
 			});

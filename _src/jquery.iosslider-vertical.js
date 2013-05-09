@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v0.3.0 (05/07/2013)
+ * Version: v0.3.5 (05/07/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -494,7 +494,7 @@
 					distanceOffsetArray.splice(0, distanceOffsetArray.length);					
 				} else {
 					distanceOffsetArray.splice(distanceOffsetArray.length * 0.10, distanceOffsetArray.length);
-					nodeOffset = distanceOffsetArray[distanceOffsetArray.length-1];
+					nodeOffset = (distanceOffsetArray.length > 0) ? distanceOffsetArray[distanceOffsetArray.length-1] : nodeOffset;
 				}
 
 				while((nodeOffset < (tempChildrenOffsets[newChildOffset] - 0.5)) || (nodeOffset > (tempChildrenOffsets[newChildOffset] + 0.5))) {
@@ -755,6 +755,7 @@
 			var startOffset = helpers.getSliderOffset(node, 'y');
 			var endOffset = childrenOffsets[slide];
 			var offsetDiff = endOffset - startOffset;
+			var direction = slide - (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 			
 			if(settings.infiniteSlider) {
 				
@@ -784,6 +785,12 @@
 						offsetDiff = (offsets[i] - startOffset);
 					}
 				
+				}
+				
+				if((offsetDiff < 0) && (direction == -1)) {
+					offsetDiff += $(node).width();
+				} else if((offsetDiff > 0) && (direction == 1)) {
+					offsetDiff -= $(node).width();
 				}
 				
 			}
@@ -866,7 +873,7 @@
 					activeChildOffsets[sliderNumber] = activeChildOffsets[sliderNumber] - numberOfSlides;
 				}
 				
-				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides + 1)%numberOfSlides;
+				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides+1;
 
 				helpers.changeSlide(nextSlide, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarHeight, stageHeight, scrollbarStageHeight, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterHeights, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 				
@@ -983,6 +990,8 @@
 				'snapToChildren': false,
 				'snapSlideCenter': false,
 				'startAtSlide': 1,
+				'mousewheelScroll': true,
+				'mousewheelScrollSensitivity': 1,
 				'scrollbar': false,
 				'scrollbarDrag': true,
 				'scrollbarHide': true,
@@ -1044,8 +1053,8 @@
 				var minTouchpoints = 0;
 				var xCurrentScrollRate = new Array(0, 0);
 				var yCurrentScrollRate = new Array(0, 0);
-				var scrollbarBlockClass = 'scrollbarBlock' + scrollbarNumber;
-				var scrollbarClass = 'scrollbar' + scrollbarNumber;
+				var scrollbarBlockClass = 'vScrollbarBlock' + scrollbarNumber;
+				var scrollbarClass = 'vScrollbar' + scrollbarNumber;
 				var scrollbarNode;
 				var scrollbarBlockNode;
 				var scrollbarStageHeight;
@@ -1103,7 +1112,7 @@
 					settings.scrollbarHide = false;
 				}
 				var $this = $(this);
-				var data = $this.data('iosslider');	
+				var data = $this.data('iosSliderVertical');	
 				if(data != undefined) return true;
            		
            		$(this).find('img').bind('dragstart.iosSliderVerticalEvent', function(event) { event.preventDefault(); });
@@ -1614,7 +1623,7 @@
 						helpers.autoSlidePause(sliderNumber);
 					});
 					
-					$(stageNode).data('iosslider', {
+					$(stageNode).data('iosSliderVertical', {
 						obj: $this,
 						settings: settings,
 						scrollerNode: scrollerNode,
@@ -1667,8 +1676,8 @@
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
-						
-						if((e.keyCode == 37) && settings.keyboardControls) {
+
+						if((e.keyCode == 38) && settings.keyboardControls) {
 							
 							e.preventDefault();
 							
@@ -1678,7 +1687,7 @@
 								helpers.changeSlide(slide - 1, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarHeight, stageHeight, scrollbarStageHeight, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterHeights, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 							} 
 								
-						} else if(((e.keyCode == 39) && settings.keyboardControls) || ((e.keyCode == 9) && settings.tabToAdvance)) {
+						} else if(((e.keyCode == 40) && settings.keyboardControls) || ((e.keyCode == 9) && settings.tabToAdvance)) {
 							
 							e.preventDefault();
 							
@@ -1692,6 +1701,28 @@
 					
 					});
 					
+				}
+				
+				if(settings.mousewheelScroll && !shortContent) {
+
+					$(scrollerNode).bind('mousewheel.iosSliderVerticalEvent', function(e, delta, deltaX, deltaY) {
+					
+						var offset = helpers.getSliderOffset(scrollerNode, 'y') + (delta * settings.mousewheelScrollSensitivity);
+						
+						if(!settings.infiniteSlider) {
+						
+							if(offset >= (scrollerHeight * -1)) {
+								offset = scrollerHeight * -1;
+							} else if(offset <= (sliderMax[sliderNumber] * -1)) {
+								offset = sliderMax[sliderNumber] * -1;
+							}
+						
+						}
+						
+						helpers.setSliderOffset(scrollerNode, offset);
+					
+					});
+				
 				}
 					
 				if(isTouch || settings.desktopClickDrag) {
@@ -2306,7 +2337,7 @@
 			return $(node).each(function() {
 			
 				var $this = $(this);
-				var data = $this.data('iosslider');
+				var data = $this.data('iosSliderVertical');
 				if(data == undefined) return false;
 				
 				if(clearStyle == undefined) {
@@ -2360,7 +2391,7 @@
 			return $(node).each(function() {
 
 				var $this = $(this);
-				var data = $this.data('iosslider');
+				var data = $this.data('iosSliderVertical');
 				if(data == undefined) return false;
 				
 				data.settings.startAtSlide = $this.data('args').currentSlideNumber;
@@ -2388,7 +2419,7 @@
 			return this.each(function() {
 				
 				var $this = $(this);
-				var data = $this.data('iosslider');
+				var data = $this.data('iosSliderVertical');
 				if(data == undefined) return false;
 				
 				if($(data.scrollerNode).children().size() == 0) {
@@ -2426,7 +2457,7 @@
 					
 				}
 					
-				$this.data('iosslider').numberOfSlides++;
+				$this.data('iosSliderVertical').numberOfSlides++;
 				
 				methods.update(this);
 			
@@ -2439,7 +2470,7 @@
 			return this.each(function() {
 			
 				var $this = $(this);
-				var data = $this.data('iosslider');
+				var data = $this.data('iosSliderVertical');
 				if(data == undefined) return false;
 
 				$(data.scrollerNode).children(':eq(' + (slideNumber - 1) + ')').remove();
@@ -2462,7 +2493,7 @@
 			return $(node).each(function() {
 					
 				var $this = $(this);
-				var data = $this.data('iosslider');
+				var data = $this.data('iosSliderVertical');
 				if(data == undefined) return false;
 				
 				slide = (slide > data.childrenOffsets.length) ? data.childrenOffsets.length - 1 : slide - 1;
@@ -2480,7 +2511,7 @@
 			return this.each(function() {
 			
 				var $this = $(this);
-				var data = $this.data('iosslider');
+				var data = $this.data('iosSliderVertical');
 				if(data == undefined) return false;
 
 				touchLocks[data.sliderNumber] = true;
@@ -2494,7 +2525,7 @@
 			return this.each(function() {
 
 				var $this = $(this);
-				var data = $this.data('iosslider');
+				var data = $this.data('iosSliderVertical');
 				if(data == undefined) return false;
 
 				touchLocks[data.sliderNumber] = false;
@@ -2508,7 +2539,7 @@
 			return this.each(function() {
 			
 				var $this = $(this);
-				var data = $this.data('iosslider');
+				var data = $this.data('iosSliderVertical');
 				if(data == undefined) return false;
 				
 				return data;
@@ -2522,7 +2553,7 @@
 			return this.each(function() {
 			
 				var $this = $(this);
-				var data = $this.data('iosslider');
+				var data = $this.data('iosSliderVertical');
 				if(data == undefined) return false;
 				
 				iosSliderSettings[data.sliderNumber].autoSlide = false;
@@ -2540,7 +2571,7 @@
 			return this.each(function() {
 			
 				var $this = $(this);
-				var data = $this.data('iosslider');
+				var data = $this.data('iosSliderVertical');
 				if(data == undefined) return false;
 				
 				iosSliderSettings[data.sliderNumber].autoSlide = true;
