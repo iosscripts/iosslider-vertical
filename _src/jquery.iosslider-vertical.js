@@ -2375,7 +2375,7 @@
 					clearTimeout(scrollTimeouts[i]);
 				}
 	    		
-	    		$this.removeData('iosslider');
+	    		$this.removeData('iosSliderVertical');
 	    		$this.removeData('args');
 		    	
 			});
