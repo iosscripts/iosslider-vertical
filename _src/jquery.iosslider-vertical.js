@@ -873,7 +873,7 @@
 					activeChildOffsets[sliderNumber] = activeChildOffsets[sliderNumber] - numberOfSlides;
 				}
 				
-				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides+1;
+				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides + 1) % numberOfSlides;
 
 				helpers.changeSlide(nextSlide, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarHeight, stageHeight, scrollbarStageHeight, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterHeights, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 				
