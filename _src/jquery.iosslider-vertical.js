@@ -873,7 +873,7 @@
 					activeChildOffsets[sliderNumber] = activeChildOffsets[sliderNumber] - numberOfSlides;
 				}
 				
-				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides+1;
+				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides + 1) % numberOfSlides;
 
 				helpers.changeSlide(nextSlide, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarHeight, stageHeight, scrollbarStageHeight, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterHeights, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 				
@@ -953,7 +953,7 @@
 			}
 			
 			this.settings = settings;
-			this.data = $(node).parent().data('iosslider');
+			this.data = $(node).parent().data('iosSliderVertical');
 			this.sliderObject = node;
 			this.sliderContainerObject = $(node).parent();
 
@@ -2382,7 +2382,7 @@
 					clearTimeout(scrollTimeouts[i]);
 				}
 	    		
-	    		$this.removeData('iosslider');
+	    		$this.removeData('iosSliderVertical');
 	    		$this.removeData('args');
 		    	
 			});
