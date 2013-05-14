@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v0.3.5 (05/07/2013)
+ * Version: v0.3.6 (05/13/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -552,8 +552,8 @@
 			}
 				
 			if(settings.onSlideComplete != '') {
-
-				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (j + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, sliderNumber);
+				
+				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (j + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), endOffset, sliderNumber);
 				
 			}
 			
@@ -934,12 +934,16 @@
 			
 			this.prevSlideNumber = ($(node).parent().data('args') == undefined) ? undefined : $(node).parent().data('args').prevSlideNumber;
 			this.prevSlideObject = ($(node).parent().data('args') == undefined) ? undefined : $(node).parent().data('args').prevSlideObject;
-			this.targetSlideNumber = undefined;
-			this.targetSlideObject = undefined;
+			this.targetSlideNumber = targetSlideOffset + 1;
+			this.targetSlideObject = $(node).children(':eq(' + this.targetSlideOffset + ')');
 			this.slideChanged = false;
 			
 			if(func == 'load') {
+				this.targetSlideNumber = undefined;
+				this.targetSlideObject = undefined;
 			} else if(func == 'start') {
+				this.targetSlideNumber = undefined;
+				this.targetSlideObject = undefined;
 			} else if(func == 'change') {
 				this.slideChanged = true;
 				this.prevSlideNumber = ($(node).parent().data('args') == undefined) ? settings.startAtSlide : $(node).parent().data('args').currentSlideNumber;	
@@ -1671,7 +1675,7 @@
 				
 				if((settings.keyboardControls || settings.tabToAdvance) && !shortContent) {
 
-					$(document).bind('keydown.iosSliderVerticalEvent', function(e) {
+					$(document).bind('keydown.iosSliderVerticalEvent-' + sliderNumber, function(e) {
 						
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
@@ -1706,7 +1710,9 @@
 				if(settings.mousewheelScroll && !shortContent) {
 
 					$(scrollerNode).bind('mousewheel.iosSliderVerticalEvent', function(e, delta, deltaX, deltaY) {
-					
+						
+						e.preventDefault();
+						
 						var offset = helpers.getSliderOffset(scrollerNode, 'y') + (delta * settings.mousewheelScrollSensitivity);
 						
 						if(!settings.infiniteSlider) {
@@ -1720,6 +1726,8 @@
 						}
 						
 						helpers.setSliderOffset(scrollerNode, offset);
+						
+						return false;
 					
 					});
 				
@@ -1912,7 +1920,7 @@
 						if(!xScrollStarted) {
 
 							var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
-							var args = new helpers.args('start', settings, scrollerNode, $(scrollerNode).children(':eq(' + slide + ')'), slide, slide);
+							var args = new helpers.args('start', settings, scrollerNode, $(scrollerNode).children(':eq(' + slide + ')'), slide, undefined);
 							$(stageNode).data('args', args);
 
 							if(settings.onSlideStart != '') {
@@ -1921,7 +1929,6 @@
 							
 						}
 						
-						//if(((yScrollDistance > 3) || (yScrollDistance < -3)) && ((xScrollDistance < 3) && (xScrollDistance > -3)) && (e.type == 'touchmove') && (!xScrollStarted)) {
 						if(((yScrollDistance > settings.verticalSlideLockThreshold) || (yScrollDistance < (settings.verticalSlideLockThreshold * -1))) && (e.type == 'touchmove') && (!xScrollStarted)) {
 						
 							preventYScroll = true;
