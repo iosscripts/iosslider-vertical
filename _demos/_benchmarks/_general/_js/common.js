@@ -4,9 +4,13 @@ $(document).ready(function() {
 	$('.debug #orientation').html('orientationChange: <strong>' + ('onorientationchange' in window) + '</strong>');
 	
 	$('.default-slider').iosSliderVertical({
+		desktopClickDrag: true
+	});
+	
+	$('.default-slider-2').iosSliderVertical({
 		desktopClickDrag: true,
-		navNextSelector: $('.default-slider .next'),
-		navPrevSelector: $('.default-slider .prev')
+		navNextSelector: $('.default-slider-2 .next'),
+		navPrevSelector: $('.default-slider-2 .prev')
 	});
 	
 	$('.default-slider-container .goToBlock .go').each(function(i) {
@@ -258,11 +262,6 @@ $(document).ready(function() {
 		snapToChildren: true
 	});
 	
-	$('.undefined-height-slider').iosSliderVertical({
-		desktopClickDrag: true,
-		snapToChildren: true
-	});
-	
 	$('.bind-event-slider .linkBlock').bind('click', function() {
 		window.open('http://google.ca');
 	});
@@ -273,22 +272,11 @@ $(document).ready(function() {
 		infiniteSlider: true
 	});
 	
-	$('.image-drag-slider').iosSliderVertical({
-		desktopClickDrag: true,
-		snapToChildren: true,
-		infiniteSlider: true
-	});
-	
 	$('.add-remove-slide-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		scrollbar: true,
 		scrollbarHide: false
-	});
-	
-	$('.short-content-slider').iosSliderVertical({
-		desktopClickDrag: true,
-		snapToChildren: true
 	});
 	
 	$('.add-remove-slide-slider-container .destInitBlock .add').bind('click', function() {
@@ -355,7 +343,7 @@ $(document).ready(function() {
 		unselectableSelector: '.unselectable'
 	});
 	
-	$('.scrollbar-y-slider').iosSliderVertical({
+	$('.scrollbar-x-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
 	});
@@ -372,23 +360,19 @@ $(document).ready(function() {
 		tabToAdvance: true
 	});
 	
-	$('.snap-center-slider').iosSliderVertical({
+	$('.paging-slider').iosSliderVertical({
 		desktopClickDrag: true,
-		snapToChildren: true,
-		snapSlideCenter: true
+		onSlideComplete: function(args) {
+			console.log(args.currentSlideNumber);
+		}
 	});
 	
-	$('.snap-center-slider-2').iosSliderVertical({
-		desktopClickDrag: true,
-		snapToChildren: true,
-		snapSlideCenter: true,
-		infiniteSlider: true
+	$('.paging-slider-container .paging .pageUp').bind('click', function() {
+		$('.paging-slider').iosSliderVertical('pageUp');	
 	});
 	
-	$('.snap-center-slider-3').iosSliderVertical({
-		desktopClickDrag: true,
-		snapToChildren: true,
-		snapSlideCenter: true
+	$('.paging-slider-container .paging .pageDown').bind('click', function() {
+		$('.paging-slider').iosSliderVertical('pageDown');	
 	});
 	
 });
