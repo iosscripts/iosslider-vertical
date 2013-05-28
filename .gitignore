@@ -2,4 +2,6 @@
 
 _demos/.DS_Store
 
-.gitignore
+_src/jquery.iosslider-vertical.demo.js
+
+_src/jquery.iosslider-vertical.demo.min.js
