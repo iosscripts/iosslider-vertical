@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$('.debug #touch').html('isTouch: <strong>' + ('ontouchstart' in window) + '</strong>');
 	$('.debug #orientation').html('orientationChange: <strong>' + ('onorientationchange' in window) + '</strong>');
 	
-	/*$('.default-slider').iosSliderVertical({
+	$('.default-slider').iosSliderVertical({
 		desktopClickDrag: true
 	});
 	
@@ -22,7 +22,7 @@ $(document).ready(function() {
 	$('.snap-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true
-	});*/
+	});
 	
 	$('.infinite-slider').iosSliderVertical({
 		desktopClickDrag: true,
@@ -30,7 +30,7 @@ $(document).ready(function() {
 		infiniteSlider: true
 	});
 	
-	/*$('.responsive-slider').iosSliderVertical({
+	$('.responsive-slider').iosSliderVertical({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true,
@@ -373,7 +373,7 @@ $(document).ready(function() {
 	
 	$('.paging-slider-container .paging .pageDown').bind('click', function() {
 		$('.paging-slider').iosSliderVertical('pageDown');	
-	});*/
+	});
 	
 });
 
