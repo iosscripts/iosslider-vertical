@@ -21,7 +21,7 @@
 
 <h2>Browser Support Details</h2>
 
-<h3>iOS <sub>iPhone / iPad / iPod Touch</sub></h3>
+<h3>iOS - iPhone / iPad / iPod Touch</h3>
 						
 <table class = 'data'>
 	
@@ -47,7 +47,7 @@
 	</tbody>
 </table>
 
-<h3 style = 'margin-top: 20px;'>Surface <sub>Multi-platform</sub></h3>
+<h3 style = 'margin-top: 20px;'>Surface - Multi-platform</h3>
 
 <table class = 'data'>
 	
@@ -69,7 +69,7 @@
 	</tbody>
 </table>
 	
-<h3>Desktop <sub>Windows / Mac</sub></h3>
+<h3>Desktop - Windows / Mac</h3>
 
 <table class = 'data'>
 	
@@ -103,7 +103,7 @@
 	</tbody>
 </table>
 
-<h3>Android <sub>Multi-platform</sub></h3>
+<h3>Android - Multi-platform</h3>
 
 <table class = 'data'>
 	
@@ -150,14 +150,14 @@
 <p>The <a href="http://jquery.com" target="_blank">jQuery</a> library and iosslider-vertical Plugin scripts must be included in the HTML header of the web page. The jQuery library must be included first for the iosslider-vertical plugin to function.</p>
 
 <pre>
-<!-- jQuery library -->
-<script type = 'text/javascript' src = 'jquery-1.4.min.js'></script>
+&lt;!-- jQuery library --&gt;
+&lt;script type = 'text/javascript' src = 'jquery-1.4.min.js'&gt;&lt;/script&gt;
 
-<!-- Optional mousewheel support -->
-<script type = 'text/javascript' src = 'jquery.mousewheel.js'></script>
+&lt;!-- Optional mousewheel support --&gt;
+&lt;script type = 'text/javascript' src = 'jquery.mousewheel.js'&gt;&lt;/script&gt;
 
-<!-- iosSlider plugin -->
-<script type = 'text/javascript' src = 'jquery.iosslider-vertical.js'></script>
+&lt;!-- iosSlider plugin --&gt;
+&lt;script type = 'text/javascript' src = 'jquery.iosslider-vertical.js'&gt;&lt;/script&gt;
 </pre>
 
 <h3>Add the HTML</h3>
@@ -166,19 +166,19 @@
 
 <pre>
 <!-- slider container -->
-<div class = 'iosSliderVertical'>
+&lt;div class = 'iosSliderVertical'&gt;
 
-	<!-- slider -->
-	<div class = 'slider'>
+	&lt;!-- slider --&gt;
+	&lt;div class = 'slider'&gt;
 	
-		<!-- slides -->
-		<div class = 'slide'>...</div>
-		<div class = 'slide'>...</div>
-		<div class = 'slide'>...</div>
+		&lt;!-- slides --&gt;
+		&lt;div class = 'slide'&gt;...&lt;/div&gt;
+		&lt;div class = 'slide'&gt;...&lt;/div&gt;
+		&lt;div class = 'slide'&gt;...&lt;/div&gt;
 	
-	</div>
+	&lt;/div&gt;
 
-</div>
+&lt;/div&gt;
 </pre>
 
 <h3>Add the CSS</h3>
@@ -705,4 +705,24 @@ $(element).data('args', {
 
 <h2 id = 'licensing'><a class = 'driverLink' name = 'licensing'></a><a class = 'driverLink' name = 'download'></a>Licensing</h2>
 
-<p>Licensing options can be found <a href = 'http://iosscripts.com/iosslider-vertical/#licensing'>here</a></p>
+<p>Licensing options can be found at <a href = 'http://iosscripts.com/iosslider-vertical/#licensing'>ttp://iosscripts.com/iosslider-vertical/#licensing</a></p>
+
+<h2>Help & Support</h2>
+
+<h3>Product Support</h3>
+
+<p>Need help setting up one of our plugins? Drop us a line and we'll do our best to help.</p>
+
+<p><a href = 'http://iosscripts.com/support/'>Access support</a></p>
+
+<h3>Feature Request</h3>
+
+<p>If you have an idea for a new feature or if our plugins are missing something your application needs, tell us about it and we'll consider adding it!</p>
+
+<p><a href = 'http://iosscripts.com/contact/?f=feature'>Submit request</a></p>
+
+<h3>Report a Bug</h3>
+
+<p>If you think you might have found a bug in one of our plugins, let us know. We'll take a look under the hood and see if we can fix it.</p>
+
+<p><a href = 'http://iosscripts.com/contact/?f=issue'>Submit a bug</a></p>
