@@ -705,7 +705,7 @@ $(element).data('args', {
 
 <h2 id = 'licensing'><a class = 'driverLink' name = 'licensing'></a><a class = 'driverLink' name = 'download'></a>Licensing</h2>
 
-<p>Licensing options can be found at <a href = 'http://iosscripts.com/iosslider-vertical/#licensing'>ttp://iosscripts.com/iosslider-vertical/#licensing</a></p>
+<p>Licensing options can be found at <a href = 'http://iosscripts.com/iosslider-vertical/#licensing'>http://iosscripts.com/iosslider-vertical/#licensing</a></p>
 
 <h2>Help & Support</h2>
 
