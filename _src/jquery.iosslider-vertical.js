@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v0.5.4 (05/29/2013)
+ * Version: v0.5.7 (06/03/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1113,6 +1113,7 @@
 				'startAtSlide': 1,
 				'mousewheelScroll': true,
 				'mousewheelScrollSensitivity': 1,
+				'mousewheelScrollOverflow': false,
 				'scrollbar': false,
 				'scrollbarDrag': true,
 				'scrollbarHide': true,
@@ -1353,12 +1354,17 @@
 							$(slideNodes[j]).css({
 								height: newHeight
 							});
-					
+						
+						} else {
+							
+							$(slideNodes[j]).css({
+								height: slideNodeHeights[j]
+							});
+						
 						}
 						
 						childrenOffsets[j] = sliderMax[sliderNumber] * -1;
 						
-						//sliderMax[sliderNumber] = sliderMax[sliderNumber] + newHeight + (slideNodeOuterHeights[j] - slideNodeHeights[j]);
 						sliderMax[sliderNumber] = sliderMax[sliderNumber] + newHeight;
 						
 					}
@@ -1868,7 +1874,7 @@
 						
 						helpers.slowScrollHorizontal(scrollerNode, slideNodes, true, scrollTimeouts, scrollbarClass, yScrollDistance, xScrollDistance, scrollbarHeight, stageHeight, scrollbarStageHeight, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterHeights, sliderNumber, infiniteSliderWidth, numberOfSlides, currentEventNode, snapOverride, centeredSlideOffset, settings);
 						
-						return mouseWheelMax;
+						return (mouseWheelMax && settings.mousewheelScrollOverflow);
 					
 					});
 				
@@ -2099,13 +2105,13 @@
 						}
 						
 						if(yScrollStarted && !preventYScroll) {
-
+							
 							var scrollPosition = helpers.getSliderOffset(scrollerNode, 'y');
-							var scrollbarSubtractor = ($(this)[0] === $(scrollbarBlockNode)[0]) ? (sliderMin[sliderNumber]) : centeredSlideOffset;
-							var scrollbarMultiplier = ($(this)[0] === $(scrollbarBlockNode)[0]) ? ((sliderMin[sliderNumber] - sliderMax[sliderNumber] - centeredSlideOffset) / (scrollbarStageHeight - scrollMargin - scrollbarHeight)) : 1;
-							var elasticPullResistance = ($(this)[0] === $(scrollbarBlockNode)[0]) ? settings.scrollbarElasticPullResistance : settings.elasticPullResistance;
-							var snapCenteredSlideOffset = (settings.snapSlideCenter && ($(this)[0] === $(scrollbarBlockNode)[0])) ? 0 : centeredSlideOffset;
-							var snapCenteredSlideOffsetScrollbar = (settings.snapSlideCenter && ($(this)[0] === $(scrollbarBlockNode)[0])) ? centeredSlideOffset : 0;
+							var scrollbarSubtractor = ($(currentEventNode)[0] === $(scrollbarNode)[0]) ? (sliderMin[sliderNumber]) : centeredSlideOffset;
+							var scrollbarMultiplier = ($(currentEventNode)[0] === $(scrollbarNode)[0]) ? ((sliderMin[sliderNumber] - sliderMax[sliderNumber] - centeredSlideOffset) / (scrollbarStageHeight - scrollMargin - scrollbarHeight)) : 1;
+							var elasticPullResistance = ($(currentEventNode)[0] === $(scrollbarNode)[0]) ? settings.scrollbarElasticPullResistance : settings.elasticPullResistance;
+							var snapCenteredSlideOffset = (settings.snapSlideCenter && ($(currentEventNode)[0] === $(scrollbarNode)[0])) ? 0 : centeredSlideOffset;
+							var snapCenteredSlideOffsetScrollbar = (settings.snapSlideCenter && ($(currentEventNode)[0] === $(scrollbarNode)[0])) ? centeredSlideOffset : 0;
 							
 							if(e.type == 'touchmove') {
 								if(currentTouches != e.touches.length) {

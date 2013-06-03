@@ -156,7 +156,7 @@
 &lt;!-- Optional mousewheel support --&gt;
 &lt;script type = 'text/javascript' src = 'jquery.mousewheel.js'&gt;&lt;/script&gt;
 
-&lt;!-- iosSlider plugin --&gt;
+&lt;!-- iosslider-vertical plugin --&gt;
 &lt;script type = 'text/javascript' src = 'jquery.iosslider-vertical.js'&gt;&lt;/script&gt;
 </pre>
 
@@ -303,6 +303,11 @@ $(document).ready(function() {
 			<td>mousewheelScrollSensitivity</td>
 			<td>1</td>
 			<td>(integer) Modifies the mouse wheel scroll sensitivity. Requires <a href = 'http://plugins.jquery.com/mousewheel/' target = '_blank'>jquery.mousewheel.js</a>.</td>
+		</tr>
+		<tr>
+			<td>mousewheelScrollOverflow</td>
+			<td>false</td>
+			<td>(boolean) Enables mouse wheel browser scrolling when bottom or top of slider is reached. Requires <a href = 'http://plugins.jquery.com/mousewheel/' target = '_blank'>jquery.mousewheel.js</a>.</td>
 		</tr>
 		<tr>
 			<td>scrollbar</td>
@@ -663,7 +668,7 @@ $(element).data('args', {
 		
 		<tr>
 			<td>$(element).iosSliderVertical('destroy');</td>
-			<td>Destroys the selected slider.<br /><em>Optional parameter: 'clearStyle' (boolean, default: true) when iosSlider is destroyed, all inline style applied to the slider will be removed.</em></td>
+			<td>Destroys the selected slider.<br /><em>Optional parameter: 'clearStyle' (boolean, default: true) when iosslider-vertical is destroyed, all inline style applied to the slider will be removed.</em></td>
 		</tr>
 		
 		<tr>

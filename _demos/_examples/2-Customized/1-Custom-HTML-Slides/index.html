@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    	
+		<!-- META -->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<style type="text/css">
+			.iosslider-vertical {
+				position: relative;
+				top: 0;
+				left: 0;
+				overflow: hidden;
+				
+				width: 400px;
+				height: 400px;
+				background: #eee;
+			}
+			
+			.iosslider-vertical .slider {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosslider-vertical .slider .item {
+				float: left;
+				
+				padding: 10px 30px 10px 10px;
+				border-bottom: 1px solid #ddd;
+			}
+			
+			.iosslider-vertical .slider .item.first {}
+			
+			.iosslider-vertical .slider .item.last {
+				border-bottom: 0;
+			}
+			
+			.iosslider-vertical .slider .item .copy {
+				margin-left: 115px;
+			}
+			
+			.iosslider-vertical .slider .item img {
+				float: left;
+				width: 100px;
+			}
+			
+			.iosslider-vertical .slider .item h4 {
+				margin: -2px 0 0 0;
+				font-size: 90%;
+			}
+			
+			.iosslider-vertical .slider .item p {
+				margin: 5px 0 0 0;
+				font-size: 85%;
+			}
+			
+			.iosslider-vertical .scrollbar {
+				width: 12px;
+				background: #aaa;
+				position: absolute;
+				top: 0;
+				bottom: 26px;
+				right: 0;
+			}
+			
+			.iosslider-vertical .prev {
+				width: 12px;
+				height: 12px;
+				background: #666 url(../../../_resources/paging.png) no-repeat 0 0;
+				position: absolute;
+				bottom: 13px;
+				right: 0;
+				cursor: pointer;
+			}
+			
+			.iosslider-vertical .next {
+				width: 12px;
+				height: 12px;
+				background: #666 url(../../../_resources/paging.png) no-repeat 0 -12px;
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				cursor: pointer;
+			}
+			
+			.iosslider-vertical .prev:hover,
+			.iosslider-vertical .next:hover {
+				background-color: #505050;
+			}
+		</style>
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../../_lib/jquery-1.4.min.js"></script>
+		<script src = "../../../../_lib/jquery.mousewheel.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../../_src/jquery.iosslider-vertical.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+			
+				$('.iosslider-vertical').iosSliderVertical({
+					scrollbarMargin: 0,
+					scrollbarWidth: 12,
+					scrollbarBorderRadius: 0,
+					scrollbarContainer: '.scrollbar',
+					snapToChildren: true
+				});
+				
+			});
+		</script>
+		
+		<title>Ex #1: Custom HTML Slides</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'iosslider-vertical'>
+		
+			<div class = 'slider'>
+			
+				<div class = 'item first'>
+					
+					<img class = 'left' src = '../../../_resources/h-slider-1-thumb.jpg' />
+					
+					<div class = 'copy'>
+					
+						<h4>Hardware accelerated</h4>
+					
+						<p>Using CSS3 for supported iOS, Surface, Android and WebKit browsers.</p>
+						
+					</div>
+				
+				</div>
+				
+				<div class = 'item'>
+				
+					<img class = 'left' src = '../../../_resources/h-slider-2-thumb.jpg' />
+					
+					<div class = 'copy'>
+					
+						<h4>Responsive support</h4>
+					
+						<p>To work with the most dynamic desktop and mobile sites.</p>
+						
+					</div>
+				
+				</div>
+				
+				<div class = 'item'>
+				
+					<img class = 'left' src = '../../../_resources/h-slider-3-thumb.jpg' />
+					
+					<div class = 'copy'>
+					
+						<h4>Tons of API callbacks</h4>
+					
+						<p>To get the perfect slider feel for your web application.</p>
+						
+					</div>
+				
+				</div>
+				
+				<div class = 'item'>
+				
+					<img class = 'left' src = '../../../_resources/h-slider-4-thumb.jpg' />
+					
+					<div class = 'copy'>
+					
+						<h4>FF/Safari/Chrome/IE7+</h4>
+					
+						<p>Full modern browser support for desktop.</p>
+						
+					</div>
+				
+				</div>
+				
+				<div class = 'item'>
+				
+					<img class = 'left' src = '../../../_resources/h-slider-5-thumb.jpg' />
+					
+					<div class = 'copy'>
+					
+						<h4>iOS/Surface/Android</h4>
+					
+						<p>Support for a wide range of mobile operating systems and platforms.</p>
+						
+					</div>
+				
+				</div>
+				
+				<div class = 'item'>
+					
+					<img class = 'left' src = '../../../_resources/h-slider-1-thumb.jpg' />
+					
+					<div class = 'copy'>
+					
+						<h4>Infinitely looping</h4>
+					
+						<p>Loop through your slides endlessly in both directions.</p>
+						
+					</div>
+				
+				</div>
+				
+				<div class = 'item'>
+				
+					<img class = 'left' src = '../../../_resources/h-slider-2-thumb.jpg' />
+					
+					<div class = 'copy'>
+					
+						<h4>Auto-sliding</h4>
+					
+						<p>Set your slider to automatically transition and pause on hover.</p>
+						
+					</div>
+				
+				</div>
+				
+				<div class = 'item'>
+				
+					<img class = 'left' src = '../../../_resources/h-slider-3-thumb.jpg' />
+					
+					<div class = 'copy'>
+					
+						<h4>Custom scrollbars</h4>
+					
+						<p>Over a dozen settings to control placement, look and feel, and user interaction.</p>
+						
+					</div>
+				
+				</div>
+				
+				<div class = 'item'>
+				
+					<img class = 'left' src = '../../../_resources/h-slider-4-thumb.jpg' />
+					
+					<div class = 'copy'>
+					
+						<h4>Slide Navigation</h4>
+					
+						<p>Built-in support for slide indicators and next/previous buttons.</p>
+						
+					</div>
+				
+				</div>
+				
+				<div class = 'item last'>
+				
+					<img class = 'left' src = '../../../_resources/h-slider-5-thumb.jpg' />
+					
+					<div class = 'copy'>
+					
+						<h4>Robust demo package</h4>
+					
+						<p>Download package includes working examples of all features.</p>
+						
+					</div>
+				
+				</div>
+				
+			</div>
+			
+			<div class = 'scrollbar'></div>
+			<div class = 'prev' onclick = "$('.iosslider-vertical').iosSliderVertical('prevPage');"></div>
+			<div class = 'next' onclick = "$('.iosslider-vertical').iosSliderVertical('nextPage');"></div>
+		
+		</div>
+	
+	</body>
+
+</html>

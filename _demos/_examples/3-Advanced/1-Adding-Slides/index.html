@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    	
+		<!-- META -->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<style type="text/css">
+			.iosslider-vertical {
+				position: relative;
+				top: 0;
+				left: 0;
+				overflow: hidden;
+				
+				width: 355px;
+				height: 400px;
+				background: #eee;
+			}
+			
+			.form {
+				width: 100%;
+				height: 45px;
+				margin: 10px 0 0 0;
+			}
+			
+			.form .input {
+				margin: 0 0 0 0;
+			}
+			
+			.form .input textarea {
+				height: 30px;
+				float: left;
+				width: 250px;
+			}
+			
+			.form .button {
+				position: relative;
+				float: left;
+				padding: 7px 0;
+				width: 83px;
+				margin: 0 0 0 20px;
+				-webkit-border-radius: 6px;
+				-moz-border-radius: 6px;
+				border-radius: 6px;
+				background: #ddd;
+				text-align: center;
+				cursor: pointer;
+			}
+			
+			.iosslider-vertical .slider {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosslider-vertical .slider .item {
+				float: left;
+				
+				padding: 10px 30px 10px 10px;
+				border-bottom: 1px solid #ddd;
+			}
+			
+			.iosslider-vertical .slider .item.left img {
+				float: left;
+				margin: 2px 12px 0 0;
+				width: 50px;
+				height: 50px;
+			}
+			
+			.iosslider-vertical .slider .item.right img {
+				float: right;
+				margin: 2px 0 0 12px;
+				width: 50px;
+				height: 50px;
+			}
+			
+			.iosslider-vertical .slider .item.left .copy {
+				margin-left: 55px;
+				width: 260px;
+			}
+			
+			.iosslider-vertical .slider .item.right .copy {
+				margin-right: 55px;
+				width: 260px;
+			}
+			
+			.iosslider-vertical .slider .item p {
+				margin: 0 0 0 0;
+				font-size: 85%;
+			}
+			
+			.iosslider-vertical .slider .item p.footnote {
+				color: #999;
+				font-style: italic;
+				margin: 4px 0 0 0;
+				font-size: 80%;
+			}
+			
+			.iosslider-vertical .slider .item.new {
+				background: #ddd;
+				opacity: 0;
+				filter: alpha(opacity=0);
+			}
+		</style>
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../../_lib/jquery-1.4.min.js"></script>
+		<script src = "../../../../_lib/jquery.mousewheel.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../../_src/jquery.iosslider-vertical.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+			
+				$('.iosslider-vertical').iosSliderVertical({
+					scrollbarBorder: '1px solid #666',
+					scrollbarOpacity: '0.8',
+					scrollbarBackground: '#666 url(../../../_resources/scrollbar-bg.png) no-repeat 50% 50%',
+					scrollbarWidth: 6
+				});
+				
+				$('#testButton').bind('click', function() {
+					submitForm();
+				});
+	
+			});
+			
+			function submitForm() {
+		
+				var side = 'left';
+				if($('.iosslider-vertical .item:eq(0)').hasClass('left')) {
+					side = 'right';
+				}
+				
+				var slide = "<div class = 'item " + side + " new'><img src = '../../../_resources/avatar.png' /><div class = 'copy'><p>" + $('#testTextarea').val() + "</p><p class = 'footnote'>- " + $('#testDate').val() + "</p></div></div>";
+				
+				$('#testTextarea').val('Write a comment...').parent().removeClass('inputSelected');
+				
+				$('.iosslider-vertical .item.new').removeClass('new');
+				
+				$('.iosslider-vertical').iosSliderVertical('addSlide', slide, 1);
+				$('.iosslider-vertical').iosSliderVertical('goToSlide', 1);
+				
+				$('.iosslider-vertical .item:first-child').animate({
+					opacity: 1
+				}, 1000);
+				
+			}
+		</script>
+		
+		<title>Ex #1: Adding Slides</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'iosslider-vertical'>
+								
+			<div class = 'slider'>
+			
+				<div class = 'item right'>
+					
+					<img src = '../../../_resources/avatar.png' />
+					
+					<div class = 'copy'>
+						
+						<p>Need help setting up one of our plugins? Drop us a line and we'll do our best to help.</p>
+						
+						<p class = 'footnote'>- MM DD, YYYY</p>
+					
+					</div>
+					
+				</div>
+				
+				<div class = 'item left'>
+					
+					<img src = '../../../_resources/avatar.png' />
+					
+					<div class = 'copy'>
+						
+						<p>If you have an idea for a new feature or if our plugins are missing something your application needs, tell us about it and we'll consider adding&nbsp;it!</p>
+						
+						<p class = 'footnote'>- MM DD, YYYY</p>
+					
+					</div>
+					
+				</div>
+				
+				<div class = 'item right'>
+					
+					<img src = '../../../_resources/avatar.png' />
+					
+					<div class = 'copy'>
+						
+						<p>If you think you might have found a bug in one of our plugins, let us know. We'll take a look under the hood and see if we can fix it.</p>
+						
+						<p class = 'footnote'>- MM DD, YYYY</p>
+						
+					</div>
+					
+				</div>
+				
+				<div class = 'item left'>
+					
+					<img src = '../../../_resources/avatar.png' />
+					
+					<div class = 'copy'>
+						
+						<p>Add the iosslider-vertical HTML code within the body of the web page. The HTML can contain as little as one slide element.</p>
+						
+						<p class = 'footnote'>- MM DD, YYYY</p>
+						
+					</div>
+					
+				</div>
+				
+				<div class = 'item right'>
+					
+					<img src = '../../../_resources/avatar.png' />
+					
+					<div class = 'copy'>
+						
+						<p>The required CSS attributes are included to guarantee optimal performance. Feel free to apply as many other CSS attributes as you want.</p>
+						
+						<p class = 'footnote'>- MM DD, YYYY</p>
+						
+					</div>
+					
+				</div>
+				
+				<div class = 'item left'>
+					
+					<img src = '../../../_resources/avatar.png' />
+					
+					<div class = 'copy'>
+						
+						<p>The jQuery library and iosslider-vertical Plugin scripts must be included in the HTML header of the web page.</p>
+						
+						<p class = 'footnote'>- MM DD, YYYY</p>
+					
+					</div>
+					
+				</div>
+				
+				<div class = 'item right'>
+					
+					<img src = '../../../_resources/avatar.png' />
+					
+					<div class = 'copy'>
+						
+						<p>To get started, you will need to download the iosslider-vertical script. The download package contains the iosslider-vertical script, the jQuery library, demos and benchmarks.</p>
+						
+						<p class = 'footnote'>- MM DD, YYYY</p>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+		
+		</div>
+		
+		<div class = 'form'>
+			
+			<div class = 'input'>
+				<textarea id = 'testTextarea'>Write a comment...</textarea>
+			</div>
+			
+			<div class = 'button col1 col lastCol right' id = 'testButton'>
+				<span>Send</span>
+			</div>
+			
+			<input type = 'hidden' id = 'testDate' value = 'MM DD, YYYY' />
+		
+		</div>
+	
+	</body>
+
+</html>
