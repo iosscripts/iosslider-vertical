@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.0.1 (06/03/2013)
+ * Version: v1.0.5 (08/12/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1116,7 +1116,7 @@
 				'mousewheelScrollOverflow': false,
 				'scrollbar': false,
 				'scrollbarDrag': true,
-				'scrollbarHide': true,
+				'scrollbarHide': false,
 				'scrollbarLocation': 'right',
 				'scrollbarContainer': '',
 				'scrollbarOpacity': 0.4,
@@ -1234,10 +1234,7 @@
 				var mouseWheelMax = false;
 				touchLocks[sliderNumber] = false;
 				slideTimeouts[sliderNumber] = new Array();
-				if(settings.scrollbarDrag) {
-					settings.scrollbar = true;
-					settings.scrollbarHide = false;
-				}
+				
 				var $this = $(this);
 				var data = $this.data('iosSliderVertical');	
 				if(data != undefined) return true;
@@ -1251,7 +1248,7 @@
 				if(settings.infiniteSlider && (numberOfSlides == 1)) {
 					settings.infiniteSlider = false;
 				}
-						
+				
 				if(settings.scrollbar) {
 					
 					if(settings.scrollbarContainer != '') {
