@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.0.7 (11/16/2013)
+ * Version: v1.0.9 (11/18/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1877,22 +1877,21 @@
 				
 				}
 					
-				if(isTouch || settings.desktopClickDrag || settings.mousewheelScroll) {
+				if(isTouch || settings.desktopClickDrag || settings.mousewheelScroll || settings.scrollbarDrag) {
 					
 					var touchStartFlag = false;
 					var touchSelection = $(scrollerNode);
 					var touchSelectionMove = $(scrollerNode);
 					var preventDefault = null;
 					var isUnselectable = false;
-					var mousedownEvent = (settings.desktopClickDrag) ? 'mousedown.iosSliderVerticalEvent' : '';
 					
 					if(settings.scrollbarDrag) {
 						touchSelection = touchSelection.add(scrollbarNode);
 						touchSelectionMove = touchSelectionMove.add(scrollbarBlockNode);
 					}
 					
-					$(touchSelection).bind(mousedownEvent + ' touchstart.iosSliderVerticalEvent', function(e) {
-						
+					$(touchSelection).bind('mousedown.iosSliderVerticalEvent touchstart.iosSliderVerticalEvent', function(e) {
+						console.log('a');
 						if(touchStartFlag) return true;
 						touchStartFlag = true;
 						
@@ -1911,6 +1910,18 @@
 						isUnselectable = helpers.isUnselectable(e.target, settings);
 						
 						if(isUnselectable) {
+							touchStartFlag = false;
+							yScrollStarted = false;
+							return true;
+						}
+
+						if(($(this)[0] === $(scrollerNode)[0]) && !settings.desktopClickDrag) {
+							touchStartFlag = false;
+							yScrollStarted = false;
+							return true;
+						}
+						
+						if(($(this)[0] === $(scrollbarNode)[0]) && !settings.scrollbarDrag) {
 							touchStartFlag = false;
 							yScrollStarted = false;
 							return true;
@@ -2485,7 +2496,13 @@
 							if(shortContent) return true;
 							
 							if(settings.desktopClickDrag) {
-								$(touchSelection).css({
+								$(scrollerNode).css({
+									cursor: grabOutCursor
+								});
+							}
+							
+							if(settings.scrollbarDrag) {
+								$(scrollbarNode).css({
 									cursor: grabOutCursor
 								});
 							}
