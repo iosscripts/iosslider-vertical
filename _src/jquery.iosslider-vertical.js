@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.0.9 (11/18/2013)
+ * Version: v1.0.10 (11/19/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1891,7 +1891,7 @@
 					}
 					
 					$(touchSelection).bind('mousedown.iosSliderVerticalEvent touchstart.iosSliderVerticalEvent', function(e) {
-						console.log('a');
+
 						if(touchStartFlag) return true;
 						touchStartFlag = true;
 						
@@ -1915,7 +1915,7 @@
 							return true;
 						}
 
-						if(($(this)[0] === $(scrollerNode)[0]) && !settings.desktopClickDrag) {
+						if(($(this)[0] === $(scrollerNode)[0]) && !settings.desktopClickDrag && !isTouch) {
 							touchStartFlag = false;
 							yScrollStarted = false;
 							return true;
