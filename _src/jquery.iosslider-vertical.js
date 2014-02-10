@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.0.10 (11/19/2013)
+ * Version: v1.0.11 (01/10/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -122,7 +122,7 @@
 					var scrollerHeight = $(node).height();
 
 					if(newOffset <= (sliderAbsMax[sliderNumber] * -1)) {
-						
+
 						var sum = originalOffsets[0] * -1;
 						$(slideNodes).each(function(i) {
 							
@@ -168,7 +168,7 @@
 				}
 				
 				if((newOffset >= (sliderMin[sliderNumber] * -1)) || (newOffset >= 0)) {
-					
+
 					var scrollerHeight = $(node).height();
 					
 					if(newOffset >= 0) {
@@ -254,15 +254,11 @@
 			
 			if(settings.infiniteSlider) {
 								
-				if(tempOffset != activeChildInfOffsets[sliderNumber]) {
-					slideChanged = true;
-				}
+				if(tempOffset != activeChildInfOffsets[sliderNumber]) slideChanged = true;
 					
 			} else {
 			
-				if(newChildOffset != activeChildOffsets[sliderNumber]) {
-					slideChanged = true;
-				}
+				if(newChildOffset != activeChildOffsets[sliderNumber]) slideChanged = true;
 			
 			}
 			
@@ -375,7 +371,7 @@
 				}
 				
 			}
-			
+
 			while((yScrollDistance > 1) || (yScrollDistance < -1)) {
 				
 				yScrollDistance = yScrollDistance * frictionCoefficient;
@@ -681,6 +677,9 @@
 			
 			if(testElement.attr('style') == '') {
 				has3D = false;
+			} else if(isGecko && (parseInt(navigator.userAgent.split('/')[3], 10) >= 21)) {
+				//bug in v21+ which does not render slides properly in 3D
+				has3D = false;
 			} else if(testElement.attr('style') != undefined) {
 				has3D = true;
 			}
@@ -893,7 +892,6 @@
 			if(settings.snapToChildren && !settings.infiniteSlider) {
 				endOffset = childrenOffsets[slide];
 			} else if(settings.infiniteSlider && settings.snapToChildren) {
-
 				while(endOffset >= testOffsets[0]) {
 					testOffsets.splice(0, 0, testOffsets[numberOfSlides-1] + $(node).height());
 					testOffsets.splice(numberOfSlides, 1);
@@ -923,6 +921,10 @@
 				t /= steps;
 				t--;
 				nextStep = startOffset + offsetDiff*(Math.pow(t,5) + 1);
+				
+				if(nextStep <= (sliderMax[sliderNumber] * -1)) nextStep += stageHeight;
+				
+				if((nextStep >= (sliderMin[sliderNumber] * -1)) || (nextStep >= 0)) nextStep -= stageHeight;
 				
 				stepArray[stepArray.length] = nextStep;
 				
