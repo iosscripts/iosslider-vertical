@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.0.11 (01/10/2014)
+ * Version: v1.0.12 (01/11/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -138,6 +138,33 @@
 						sliderMin[sliderNumber] = childrenOffsets[0] * -1 + centeredSlideOffset;
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerHeight - stageHeight;
 						infiniteSliderOffset[sliderNumber] = 0;
+
+						while((childrenOffsets[childrenOffsets.length-1] - centeredSlideOffset) >= (newOffset - stageHeight)) {
+							
+							var lowSlideNumber = 0;
+							var lowSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'y');
+							$(slideNodes).each(function(i) {
+								
+								if(helpers.getSliderOffset(this, 'y') < lowSlideOffset) {
+									lowSlideOffset = helpers.getSliderOffset(this, 'y');
+									lowSlideNumber = i;
+								}
+								
+							});
+
+							var tempOffset = sliderMin[sliderNumber] + scrollerHeight;
+							helpers.setSliderOffset($(slideNodes)[lowSlideNumber], tempOffset);
+
+							sliderMin[sliderNumber] = childrenOffsets[1] * -1 + centeredSlideOffset;
+							sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerHeight - stageHeight;
+							
+							childrenOffsets.splice(0, 1);
+							childrenOffsets.splice(childrenOffsets.length, 0, tempOffset * -1 + centeredSlideOffset);
+
+							infiniteSliderOffset[sliderNumber]++;
+							activeChildOffsets[sliderNumber]--;
+							
+						}
 						
 					} else {
 						
@@ -168,14 +195,14 @@
 				}
 				
 				if((newOffset >= (sliderMin[sliderNumber] * -1)) || (newOffset >= 0)) {
-
-					var scrollerHeight = $(node).height();
 					
-					if(newOffset >= 0) {
+					var scrollerHeight = $(node).height();
 
+					if(newOffset >= 0) {
+												
 						var sum = originalOffsets[0] * -1;
 						$(slideNodes).each(function(i) {
-							
+
 							helpers.setSliderOffset($(slideNodes)[i], sum + centeredSlideOffset);
 							if(i < childrenOffsets.length) {
 								childrenOffsets[i] = sum * -1;
@@ -188,8 +215,8 @@
 						sliderMin[sliderNumber] = childrenOffsets[0] * -1 + centeredSlideOffset;
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerHeight - stageHeight;
 						infiniteSliderOffset[sliderNumber] = numberOfSlides;
-						
-						while(((childrenOffsets[0] * -1 - scrollerHeight + centeredSlideOffset) > 0)) {
+
+						while((childrenOffsets[0] + centeredSlideOffset) <= newOffset) {
 
 							var highSlideNumber = 0;
 							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'y');
@@ -385,7 +412,7 @@
 				if(settings.infiniteSlider) {
 					
 					if(nodeOffset <= (tempSliderMax * -1)) {
-						
+
 						var scrollerHeight = $(node).height();
 							
 						var lowSlideNumber = 0;
@@ -437,7 +464,7 @@
 						tempSliderMax = tempSliderMin + scrollerHeight - stageHeight;
 
 						tempInfiniteSliderOffset--;
-					
+
 					}
 						
 				}
@@ -531,7 +558,7 @@
 			for(var j = jStart; j < distanceOffsetArray.length; j = j + 2) {
 				
 				if((j == jStart) || (Math.abs(distanceOffsetArray[j] - lastCheckOffset) > 1) || (j >= (distanceOffsetArray.length - 2))) {
-				
+					
 					lastCheckOffset	= distanceOffsetArray[j];
 					
 					scrollTimeouts[scrollTimeouts.length] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * j, node, slideNodes, distanceOffsetArray[j], scrollbarClass, scrollbarHeight, stageHeight, scrollbarStageHeight, scrollMargin, scrollBorder, newChildOffset, originalOffsets, childrenOffsets, infiniteSliderWidth, numberOfSlides, slideNodeOuterHeights, sliderNumber, centeredSlideOffset, endOffset, settings);
