@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.0.13 (01/12/2014)
+ * Version: v1.0.13 (01/12/2014) (Demo Version)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1268,6 +1268,12 @@
 				var data = $this.data('iosSliderVertical');	
 				if(data != undefined) return true;
            		
+           		var xArray = ['d', 'e', 'm', 'o', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n'];
+				var xClass = Math.floor(Math.random()*12317);
+				$(scrollerNode).parent().append("<i class = 'i" + xClass + "'></i>").append("<i class = 'i" + xClass + "'></i>");
+				$('.i' + xClass).css({ position: 'absolute', right: '10px', bottom: '10px', zIndex: 1000, fontStyle: 'normal', background: '#fff', opacity: 0.2 }).eq(1).css({ bottom: 'auto', right: 'auto', top: '10px', left: '10px' });
+				for(var i = 0; i < xArray.length; i++) { $('.i' + xClass).html($('.i' + xClass).html() + xArray[i]); }
+
            		$(this).find('img').bind('dragstart.iosSliderVerticalEvent', function(event) { event.preventDefault(); });
 
 				if(settings.infiniteSlider) {
