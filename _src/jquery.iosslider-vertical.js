@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.0.15 (02/15/2014)
+ * Version: v1.0.16 (02/15/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2050,7 +2050,6 @@
 							var e = e.originalEvent;
 						}
 						
-						console.log(touchLocks[sliderNumber], shortContent, isUnselectable, !touchStartFlag);
 						if(touchLocks[sliderNumber] || shortContent || isUnselectable || !(touchStartFlag || mouseWheelScroll)) return true;
 						
 						var edgeDegradation = 0;
