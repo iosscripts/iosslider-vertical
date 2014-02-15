@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.0.14 (02/15/2014)
+ * Version: v1.0.15 (02/15/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1143,7 +1143,7 @@
 				'mousewheelScroll': true,
 				'mousewheelScrollSensitivity': 1,
 				'mousewheelScrollOverflow': false,
-				'scrollbar': false,
+				'scrollbar': true,
 				'scrollbarDrag': true,
 				'scrollbarHide': false,
 				'scrollbarLocation': 'right',
