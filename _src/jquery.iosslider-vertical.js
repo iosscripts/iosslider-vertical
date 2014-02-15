@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.0.13 (01/12/2014) (Demo Version)
+ * Version: v1.0.14 (02/15/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1902,7 +1902,7 @@
 						mouseWheelMax = false;
 						currentEventNode = undefined;
 						
-						$(scrollerNode).trigger('mousemove.iosSliderVerticalEvent');
+						$(document).trigger('mousemove.iosSliderVerticalEvent');
 						
 						helpers.slowScrollHorizontal(scrollerNode, slideNodes, true, scrollTimeouts, scrollbarClass, yScrollDistance, xScrollDistance, scrollbarHeight, stageHeight, scrollbarStageHeight, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterHeights, sliderNumber, infiniteSliderWidth, numberOfSlides, currentEventNode, snapOverride, centeredSlideOffset, settings);
 						
@@ -2050,11 +2050,14 @@
 
 					});
 					
-					$(touchSelectionMove).bind('touchmove.iosSliderVerticalEvent mousemove.iosSliderVerticalEvent', function(e) {
+					$(document).bind('touchmove.iosSliderVerticalEvent mousemove.iosSliderVerticalEvent', function(e) {
+
+						if(!isIe7 && !isIe8) {
+							var e = e.originalEvent;
+						}
 						
-						if(touchLocks[sliderNumber] || shortContent) return true;
-							
-						if(isUnselectable) return true;
+						console.log(touchLocks[sliderNumber], shortContent, isUnselectable, !touchStartFlag);
+						if(touchLocks[sliderNumber] || shortContent || isUnselectable || !(touchStartFlag || mouseWheelScroll)) return true;
 						
 						var edgeDegradation = 0;
 
@@ -2064,24 +2067,22 @@
 							xScrollDistance = 0;
 							yScrollDistance = mouseWheelDelta;
 							eventY = yScrollDistance * -1;
-							yScrollStartPosition = (helpers.getSliderOffset(this, 'y') - yScrollDistance) * -1;
+							yScrollStartPosition = (helpers.getSliderOffset(scrollerNode, 'y') - yScrollDistance) * -1;
 							
 						} else {
-
-							if(!isIe7 && !isIe8) {
-								var e = e.originalEvent;
-							}
 							
 							if(e.type == 'touchmove') {
-							
+
 								eventY = e.touches[0].pageY;
 								eventX = e.touches[0].pageX;
 								
 							} else {
-							
+
 								if(window.getSelection) {
 									if(window.getSelection().empty) {
-										//window.getSelection().empty(); /* removed to enable input fields within the slider */
+										if(!$(e.target).is('input')) {
+											window.getSelection().empty();
+										}
 									} else if(window.getSelection().removeAllRanges) {
 										window.getSelection().removeAllRanges();
 									}
@@ -2318,14 +2319,14 @@
 							
 								if(newOffset > (sliderMin[sliderNumber] * -1 + centeredSlideOffset)) {
 									newOffset = sliderMin[sliderNumber] * -1 + centeredSlideOffset;
-									yScrollStartPosition = helpers.getSliderOffset(this, 'y') * -1;
+									yScrollStartPosition = helpers.getSliderOffset(scrollerNode, 'y') * -1;
 									eventY = 0;
 									mouseWheelMax = true;
 								}
 								
 								if(newOffset < (sliderMax[sliderNumber] * -1)) {
 									newOffset = sliderMax[sliderNumber] * -1;
-									yScrollStartPosition = helpers.getSliderOffset(this, 'y') * -1;
+									yScrollStartPosition = helpers.getSliderOffset(scrollerNode, 'y') * -1;
 									eventY = 0;
 									mouseWheelMax = true;
 								}
@@ -2408,8 +2409,7 @@
 							}
 							
 						}
-						
-						touchStartFlag = false;
+
 						mouseWheelScroll = false;
 						
 					});
@@ -2460,12 +2460,14 @@
 						onclickEvents.each(function() {
 							
 							this.onclick = function(event) {
-								if(yScrollStarted) { 
+								if(xScrollStarted) { 
 									return false;
 								}
-							
-								$(this).data('onclick').call(this, event || window.event);
+								
+								if($(this).data('onclick')) $(this).data('onclick').call(this, event || window.event);
 							}
+							
+							this.onclick = $(this).data('onclick');
 							
 						});
 						
@@ -2527,7 +2529,7 @@
 						}
 						
 						if(!isEventCleared[sliderNumber]) {
-						
+							
 							if(shortContent) return true;
 							
 							if(settings.desktopClickDrag) {
