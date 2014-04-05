@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.0.16 (02/15/2014)
+ * Version: v1.0.17 (04/04/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
