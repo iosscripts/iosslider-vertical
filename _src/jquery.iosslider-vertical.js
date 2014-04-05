@@ -949,10 +949,6 @@
 				t--;
 				nextStep = startOffset + offsetDiff*(Math.pow(t,5) + 1);
 				
-				if(nextStep <= (sliderMax[sliderNumber] * -1)) nextStep += stageHeight;
-				
-				if((nextStep >= (sliderMin[sliderNumber] * -1)) || (nextStep >= 0)) nextStep -= stageHeight;
-				
 				stepArray[stepArray.length] = nextStep;
 				
 			}
