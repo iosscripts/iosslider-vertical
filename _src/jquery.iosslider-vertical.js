@@ -1575,7 +1575,7 @@
 						
 					}
 					
-					if(settings.scrollbar) {
+					if(settings.scrollbar && !shortContent) {
 						
 						$('.' + scrollbarBlockClass).css({ 
 							margin: settings.scrollbarMargin,
